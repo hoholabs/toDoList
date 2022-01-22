@@ -6,7 +6,15 @@
   background-color: burlywood;
   color: green;
   display:grid;
+  width: 80vw;
+  justify-content: center;
+  margin: 0 auto;
 }
+
+#nav{
+  border: solid red 2px;
+}
+
 .task{
   display:grid;
   grid-template-columns: auto auto auto auto;

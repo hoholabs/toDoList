@@ -1,8 +1,11 @@
 import './style.css';
 import Icon from './icon.png';
-import { format, compareAsc } from 'date-fns'
+import { format, compareAsc } from 'date-fns';
+import addNav from './nav.js';
+
 
 let mainContainer = document.getElementById("main-container");
+addNav();
 
 const taskList = [];
 
