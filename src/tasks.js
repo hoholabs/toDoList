@@ -6,7 +6,7 @@ let mainContainer = document.getElementById('main-container');
 const taskList = [];
 
 //function to call to make tasks
-function createTask(name,desc,due,priority){
+export function createTask(name,desc,due,priority){
     return{
       name:name,
       desc:desc,
@@ -16,7 +16,7 @@ function createTask(name,desc,due,priority){
   }
   
 //function to add the task to the list
-function addTask (task){
+export function addTask (task){
 taskList.push(task);
 };
 
@@ -49,9 +49,24 @@ taskList.forEach(element => {
 };
 
 //function to add a new blank task
-function newTask(){
+export function newTask(){
     let blankTask = createTask(' ',' ',' ',' ');
     addTask(blankTask);
+    clearTasks();
+    showTasks();
+    createNewTaskBtn();
+};
+
+//function to clear all tasks
+function clearTasks(){
+    const array = document.querySelectorAll('.task');
+    array.forEach(element => {
+        console.log(element);
+        element.remove();
+    });
+    let newTaskBtn = document.getElementById("new-task-btn")
+    console.log(newTaskBtn);
+    newTaskBtn.remove();
 };
 
 // //create the edit task button
@@ -69,15 +84,18 @@ return editTaskBtn;
 export function createNewTaskBtn(){
     let newTaskBtn = document.createElement('button');
     newTaskBtn.textContent = '+';
+    newTaskBtn.id = "new-task-btn";
+    newTaskBtn.addEventListener('click',newTask); 
     mainContainer.append(newTaskBtn);
 }
 
+//add functionality to add blank task button
+
+
 
 //example tasks
-const task1 = createTask('Task', 'Description', 'Due date', 'Priority');
-addTask(task1);
-const task2 = createTask('Do the Dishes', 'Gotta wash wash wash wash', '22/04/20', '5');
-addTask(task2);
-newTask();
-//addEditTaskBtn();
+
+//addTask(createTask('Task', 'Description', 'Due date', 'Priority'));
+//addTask(createTask('Do the Dishes', 'Gotta wash wash wash wash', '22/04/20', '5'));
+
 
