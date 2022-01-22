@@ -1,12 +1,12 @@
 import threeDots from './noun-three-dot-4287657.svg';
 
 
-let mainContainer = document.getElementById("main-container");
+let mainContainer = document.getElementById('main-container');
 
 const taskList = [];
 
 //function to call to make tasks
-export function createTask(name,desc,due,priority){
+function createTask(name,desc,due,priority){
     return{
       name:name,
       desc:desc,
@@ -16,7 +16,7 @@ export function createTask(name,desc,due,priority){
   }
   
 //function to add the task to the list
-export function addTask (task){
+function addTask (task){
 taskList.push(task);
 };
 
@@ -27,15 +27,15 @@ export function showTasks(){
 taskList.forEach(element => {
 
     //creates a div for the task
-    let task = document.createElement("div")
-    task.className = "task";    
+    let task = document.createElement('div')
+    task.className = 'task';    
 
     //loops through each element in the object to create an input,
     // assign a classname, value, and append it to the task
     for (const prop in element) {
         if (Object.hasOwnProperty.call(element, prop)) {            
-            let input = document.createElement("input");
-            input.className = prop;
+            let input = document.createElement('input');
+            input.classList.add('task-item',prop);
             input.value = element[prop];
             task.append(input);              
         }
@@ -49,31 +49,35 @@ taskList.forEach(element => {
 };
 
 //function to add a new blank task
-function newTask(task0){
-    let blankTask = createTask(" "," "," "," ");
+function newTask(){
+    let blankTask = createTask(' ',' ',' ',' ');
     addTask(blankTask);
 };
 
 // //create the edit task button
-export function addEditTaskBtn(){
-const editTaskBtn = document.createElement("button");
-editTaskBtn.id = "edit-task-button";
-//editTaskBtn.textContent = "+";
+function addEditTaskBtn(){
+const editTaskBtn = document.createElement('button');
+editTaskBtn.id = 'edit-task-button';
+//editTaskBtn.textContent = '+';
 const editIcon = new Image();
 editIcon.src = threeDots;
 editTaskBtn.append(editIcon);
 return editTaskBtn;
 };
 
-//change svg background I guess??
-//<svg width="96px" height="96px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+//function to create add blank task button
+export function createNewTaskBtn(){
+    let newTaskBtn = document.createElement('button');
+    newTaskBtn.textContent = '+';
+    mainContainer.append(newTaskBtn);
+}
 
 
 //example tasks
-const task1 = createTask("Task", "Description", "Due date", "Priority");
+const task1 = createTask('Task', 'Description', 'Due date', 'Priority');
 addTask(task1);
-const task2 = createTask("Do the Dishes", "Gotta wash wash wash wash", "22/04/20", "5");
+const task2 = createTask('Do the Dishes', 'Gotta wash wash wash wash', '22/04/20', '5');
 addTask(task2);
-newTask("new");
+newTask();
 //addEditTaskBtn();
 
