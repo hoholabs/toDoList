@@ -1,4 +1,13 @@
-.hello {
-    color: red;
-    background: url('./icon.png');
-  }
+:root{
+
+}
+
+#main-container{
+  background-color: burlywood;
+  color: green;
+  display:grid;
+}
+.task{
+  display:grid;
+  grid-template-columns: auto auto auto auto;
+}

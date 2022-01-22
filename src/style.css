@@ -1,5 +1,14 @@
-.hello {
-  color: red;
-  background: url("./icon.png");
+#main-container {
+  background-color: burlywood;
+  color: green;
+  display: -ms-grid;
+  display: grid;
+}
+
+.task {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto auto auto;
+      grid-template-columns: auto auto auto auto;
 }
 /*# sourceMappingURL=style.css.map */
