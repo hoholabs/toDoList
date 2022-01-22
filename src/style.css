@@ -42,11 +42,20 @@
   margin: 5px;
 }
 
+.tab {
+  border: solid purple 2px;
+  border-radius: 20px 50px 5px 5px;
+  padding-right: 10px;
+  padding-left: 5px;
+  height: 25px;
+  line-height: 30px;
+}
+
 .task {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 20vw 40vw 10vw 10vw;
-      grid-template-columns: 20vw 40vw 10vw 10vw;
+  -ms-grid-columns: 15vw 40vw 15vw 15vw 5vw;
+      grid-template-columns: 15vw 40vw 15vw 15vw 5vw;
   border: solid var(--color2) 2px;
   border-radius: 5px;
   border-top: 0;
@@ -57,35 +66,44 @@
 
 .task .name {
   text-align: left;
-  width: 20vw;
+  width: 13vw;
   border: none;
+  border-radius: 50px;
+  padding: 5px;
 }
 
 .task .desc {
   text-align: left;
-  width: 40vw;
+  width: 38vw;
   border: none;
+  border-radius: 50px;
+  padding: 5px;
 }
 
 .task .due {
   text-align: center;
-  width: 10vw;
+  width: 13vw;
   border: none;
+  border-radius: 50px;
+  padding: 5px;
 }
 
 .task .priority {
   text-align: center;
-  width: 10vw;
+  width: 13vw;
   border: none;
   border-radius: 50px;
+  padding: 5px;
 }
 
-.tab {
-  border: solid purple 2px;
-  border-radius: 20px 50px 5px 5px;
-  padding-right: 10px;
-  padding-left: 5px;
-  height: 25px;
-  line-height: 30px;
+#edit-task-button {
+  width: 4vw;
+}
+
+#edit-task-button img {
+  width: 2vw;
+  -o-object-fit: cover;
+     object-fit: cover;
+  vertical-align: middle;
 }
 /*# sourceMappingURL=style.css.map */
