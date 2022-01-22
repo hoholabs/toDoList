@@ -1,6 +1,11 @@
+:root {
+  --color1: rgb(188, 139, 192);
+  --color2: rgb(70, 29, 66);
+  --color3: rgb(228, 209, 228);
+}
+
 #main-container {
-  background-color: burlywood;
-  color: green;
+  color: var(--color2);
   display: -ms-grid;
   display: grid;
   width: 80vw;
@@ -11,11 +16,30 @@
 }
 
 #nav {
-  border: solid red 2px;
+  border: solid var(--color2) 2px;
+  border-radius: 20px 50px 5px 5px;
+  background-color: var(--color3);
+  padding: 5px;
+  padding-bottom: 0px;
 }
 
 #tab-bar {
-  border: solid orchid 2px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#new-tab-button {
+  border-radius: 999px;
+  border: 0;
+  background-color: var(--color1);
+  color: var(--color2);
+  height: 20px;
+  width: 20px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin: 5px;
 }
 
 .task {
@@ -28,7 +52,10 @@
 
 .tab {
   border: solid purple 2px;
-  height: 10px;
-  width: 20px;
+  border-radius: 20px 50px 5px 5px;
+  padding-right: 10px;
+  padding-left: 5px;
+  height: 25px;
+  line-height: 30px;
 }
 /*# sourceMappingURL=style.css.map */

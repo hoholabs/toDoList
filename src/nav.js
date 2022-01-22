@@ -10,7 +10,7 @@ navBar.textContent = "NAV BAR";
 //ceate tab bar
 let tabBar = document.createElement("div");
 tabBar.id = "tab-bar";
-tabBar.textContent = "TAB BAR";
+//tabBar.textContent = "TAB BAR";
     //create new tab button
     let newTabBtn = document.createElement('button');
     newTabBtn.id = "new-tab-button";
@@ -23,7 +23,7 @@ tabBar.textContent = "TAB BAR";
         addTab(newTab);
     }
 
-
+addTab("main");
 navBar.append(tabBar);
 
 //add tab to Navbar
@@ -31,6 +31,8 @@ navBar.append(tabBar);
 function addTab(name){
     let newTab = document.createElement("div");
     newTab.className = "tab";
+    newTab.textContent = name;
+    newTab.style.order = "-1";
     tabBar.append(newTab);
 };
 
