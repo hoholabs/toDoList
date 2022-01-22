@@ -1,6 +1,6 @@
 :root{
   --color1: rgb(188, 139, 192);
-  --color2: rgb(70, 29, 66);
+  --color2: rgba(70, 29, 66, 0.753);
   --color3: rgb(228, 209, 228);
 
 }
@@ -39,8 +39,35 @@
 
 .task{
   display:grid;
-  grid-template-columns: 20vw 40vw 15vw 5vw;
-  border: solid black 2px;
+  grid-template-columns: 20vw 40vw 10vw 10vw;
+  border: solid var(--color2) 2px;
+  border-radius: 5px;
+  border-top: 0;
+  padding: 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+
+  .name{
+    text-align: left;
+    width: 20vw;
+    border:none;
+  }
+  .desc{
+    text-align: left;
+    width: 40vw;
+    border:none;
+  }
+  .due{
+    text-align: center;
+    width: 10vw;
+    border:none;
+  }
+  .priority{
+    text-align: center;
+    width: 10vw;
+    border:none;
+    border-radius: 50px;
+  }
 }
 
 .tab{

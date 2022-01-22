@@ -5,7 +5,7 @@ let mainContainer = document.getElementById('main-container');
 let navBar = document.createElement("nav");
 navBar.id = "nav"
 navBar.style.display = "grid";
-navBar.textContent = "NAV BAR";
+//navBar.textContent = "NAV BAR";
 
 //ceate tab bar
 let tabBar = document.createElement("div");
@@ -39,7 +39,7 @@ function addTab(name){
 // addTab(default);
 
 //Add Nav to top of page
-export default function addNav(){
+export function addNav(){
     mainContainer.append(navBar);
 }
 
