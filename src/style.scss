@@ -15,7 +15,17 @@
   border: solid red 2px;
 }
 
+#tab-bar{
+  border:solid orchid 2px;
+}
 .task{
   display:grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: 20vw 40vw 15vw 5vw;
+  border: solid black 2px;
+}
+
+.tab{
+  border:solid purple 2px;
+  height: 10px;
+  width: 20px;
 }
