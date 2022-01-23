@@ -115,7 +115,7 @@
 }
 
 
-#edit-task-button{
+.task-menu-button{
   //border:solid green 2px;
   width: 4vw;
   border:none;
@@ -140,4 +140,15 @@
   border: solid var(--color2) 2px;
   border-top: 0;
   border-radius: 0px 0px 20px 50px;
+}
+
+.task-menu-popup{
+  border:solid var(--color2) 2px;
+  border-radius: 10px;
+  background-color: var(--color3);
+  width:100px;
+  height:100px;
+  right: 50px;
+  position:absolute;
+  display:none;
 }

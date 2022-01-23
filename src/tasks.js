@@ -1,5 +1,5 @@
-import threeDots from './noun-three-dot-4287657.svg';
 import { getTab } from './nav.js';
+import { taskMenuBtn } from './editTask.js';
 
 let mainContainer = document.getElementById('main-container');
 
@@ -49,7 +49,7 @@ taskList.forEach(element => {
             }
         }
         //add edit button to task
-        task.append(addEditTaskBtn());
+        task.append(taskMenuBtn());
 
         //adds the task at the bottom of the main container
         mainContainer.append(task);
@@ -119,16 +119,15 @@ function clearTasks(){
     console.log("clear finished");
 };
 
-//create the edit task button
-function addEditTaskBtn(){
-const editTaskBtn = document.createElement('button');
-editTaskBtn.id = 'edit-task-button';
-//editTaskBtn.textContent = '+';
-const editIcon = new Image();
-editIcon.src = threeDots;
-editTaskBtn.append(editIcon);
-return editTaskBtn;
-};
+// //create the edit task button
+// function addtaskMenuBtn(){
+// const taskMenuBtn = document.createElement('button');
+// taskMenuBtn.id = 'edit-task-button';
+// const editIcon = new Image();
+// editIcon.src = threeDots;
+// taskMenuBtn.append(editIcon);
+// return taskMenuBtn;
+// };
 
 //function to create add blank task button
 export function createNewTaskBtn(){
@@ -138,14 +137,4 @@ export function createNewTaskBtn(){
     newTaskBtn.addEventListener('click',newTask); 
     mainContainer.append(newTaskBtn);
 }
-
-//add functionality to add blank task button
-
-
-
-//example tasks
-
-//addTask(createTask('Task', 'Description', 'Due date', 'Priority'));
-//addTask(createTask('Do the Dishes', 'Gotta wash wash wash wash', '22/04/20', '5','main'));
-
 
