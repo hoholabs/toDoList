@@ -12,14 +12,30 @@
   width: 80vw;
   justify-content: center;
   margin: 0 auto;
+  border: none;
 }
 
 #nav{
   border: solid var(--color2) 2px;
-  border-radius: 20px 50px 0px 0px;
+  border-radius: 10px 25px 0px 0px;
   background-color: var(--color3);
-  padding: 5px;
-  padding-bottom: 0px;
+  border-bottom: 0;
+
+}
+
+#title-bar{
+  display:grid;
+  grid-template-columns: 15vw 40vw 15vw 15vw 5vw;
+  border: solid var(--color2) 2px;
+  padding: 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+  height: 5vh;
+  background-color: var(--color3);
+  display:grid;
+  border-left:none;
+  border-right:none;
+
 }
 
 // TABS
@@ -60,7 +76,7 @@
   padding-right: 5px;
   height: 5vh;
   background-color: var(--color3);
-
+}
   .task-item{
     border:none;
     border-radius: 50px;
@@ -85,7 +101,7 @@
     text-align: center;
     width: 13vw;
   }
-}
+
 
 #edit-task-button{
   //border:solid green 2px;

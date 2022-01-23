@@ -1,3 +1,5 @@
+import { createTask } from './tasks';
+
 //Get main container from page
 let mainContainer = document.getElementById('main-container');
 
@@ -5,7 +7,7 @@ let mainContainer = document.getElementById('main-container');
 let navBar = document.createElement("nav");
 navBar.id = "nav"
 navBar.style.display = "grid";
-//navBar.textContent = "NAV BAR";
+navBar.textContent = "NAV BAR";
 
 //ceate tab bar
 let tabBar = document.createElement("div");
@@ -36,11 +38,30 @@ function addTab(name){
     tabBar.append(newTab);
 };
 
-// addTab(default);
+//create title bar
+let titleBar = document.createElement('div')
+//titleBar.classList.add('task');
+titleBar.id = 'title-bar';
+
+let titles = createTask('Task', 'Description', 'Due date', 'Priority');
+
+for (const prop in titles) {
+    if (Object.hasOwnProperty.call(titles, prop)) {
+        let div = document.createElement('div');
+        div.classList.add("task-item", prop)
+        div.textContent = titles[prop]
+        titleBar.append(div);
+    }
+}
+
+
+navBar.append(titleBar);
+
+
+
 
 //Add Nav to top of page
 export function addNav(){
     mainContainer.append(navBar);
 }
 
-//export default addNav;

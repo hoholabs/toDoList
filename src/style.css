@@ -13,14 +13,30 @@
       -ms-flex-pack: center;
           justify-content: center;
   margin: 0 auto;
+  border: none;
 }
 
 #nav {
   border: solid var(--color2) 2px;
-  border-radius: 20px 50px 0px 0px;
+  border-radius: 10px 25px 0px 0px;
   background-color: var(--color3);
-  padding: 5px;
-  padding-bottom: 0px;
+  border-bottom: 0;
+}
+
+#title-bar {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 15vw 40vw 15vw 15vw 5vw;
+      grid-template-columns: 15vw 40vw 15vw 15vw 5vw;
+  border: solid var(--color2) 2px;
+  padding: 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+  height: 5vh;
+  background-color: var(--color3);
+  display: grid;
+  border-left: none;
+  border-right: none;
 }
 
 #tab-bar {
@@ -65,7 +81,7 @@
   background-color: var(--color3);
 }
 
-.task .task-item {
+.task-item {
   border: none;
   border-radius: 50px;
   padding: 5px;
@@ -73,22 +89,22 @@
   background-color: var(--color3);
 }
 
-.task .name {
+.name {
   text-align: left;
   width: 13vw;
 }
 
-.task .desc {
+.desc {
   text-align: left;
   width: 38vw;
 }
 
-.task .due {
+.due {
   text-align: center;
   width: 13vw;
 }
 
-.task .priority {
+.priority {
   text-align: center;
   width: 13vw;
 }

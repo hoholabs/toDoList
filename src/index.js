@@ -9,16 +9,11 @@ let mainContainer = document.getElementById('main-container');
 
 //clear();
 addNav();
-addTask(createTask('Task', 'Description', 'Due date', 'Priority'));
+//addTask(createTask('Task', 'Description', 'Due date', 'Priority'));
 //newTask();
 showTasks();
 createNewTaskBtn();
 
-
-//function to clear the main container
-// function clear(){
-//   mainContainer.innerHTML = '';
-// }
 
 //ATTRIBUTES
 
