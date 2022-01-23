@@ -18,15 +18,17 @@ export function createTask(name,desc,due,priority,inTab){
   
 //function to add the task to the list
 export function addTask (task){
-    console.log("add task");
+    //console.log("add task");
     taskList.push(task);
-    console.log(taskList);
+    //console.log(taskList);
 };
 
 //function to show tasklist in DOM
 
 export function showTasks(tab){
 clearTasks();
+//i to track which index of taskList code is checking
+var i=0
 
 taskList.forEach(element => {
     //console.log(getTab());
@@ -48,12 +50,17 @@ taskList.forEach(element => {
                 task.append(div);              
             }
         }
-        //add edit button to task
+        //add menu button to task
         task.append(taskMenuBtn());
 
+        //assign each task an id
+        task.id = `task-${i}`;
+        
+        
         //adds the task at the bottom of the main container
         mainContainer.append(task);
         }
+    i++
     });
 
 createNewTaskBtn();
@@ -87,7 +94,7 @@ export function newTask(){
     okBtn.id = "ok-btn";
     okBtn.textContent = "OK";
     okBtn.addEventListener('click', function() {
-        console.log("ok");
+        //console.log("ok");
         let newTaskName = document.getElementById('new-task-name').value;
         let newTaskDesc = document.getElementById('new-task-desc').value;
         let newTaskDue = document.getElementById('new-task-due').value;
@@ -107,7 +114,7 @@ export function newTask(){
 
 //function to clear all tasks
 function clearTasks(){
-    console.log("clear started");
+    //console.log("clear started");
     const array = document.querySelectorAll('.task');
     array.forEach(element => {        
         element.remove();
@@ -116,18 +123,8 @@ function clearTasks(){
     if (newTaskBtn != null){
     newTaskBtn.remove();
     };
-    console.log("clear finished");
+    //console.log("clear finished");
 };
-
-// //create the edit task button
-// function addtaskMenuBtn(){
-// const taskMenuBtn = document.createElement('button');
-// taskMenuBtn.id = 'edit-task-button';
-// const editIcon = new Image();
-// editIcon.src = threeDots;
-// taskMenuBtn.append(editIcon);
-// return taskMenuBtn;
-// };
 
 //function to create add blank task button
 export function createNewTaskBtn(){
@@ -138,3 +135,18 @@ export function createNewTaskBtn(){
     mainContainer.append(newTaskBtn);
 }
 
+//function to find a task by its id
+
+export function findTask(id){
+
+    let index = id.slice(5);
+    return index
+}
+
+//function to remove a task
+
+export function deleteTask(index) {
+    console.log(index);
+    taskList.splice(index, 1);
+    showTasks();
+}

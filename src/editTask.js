@@ -1,4 +1,5 @@
 import threeDots from './noun-three-dot-4287657.svg';
+import { findTask, deleteTask } from './tasks';
 
 //create and return the edit task button
 
@@ -31,13 +32,15 @@ export function taskMenuBtn(){
     taskRemoveBtn.addEventListener('click', removeTask);
     editTaskPopup.append(taskRemoveBtn)
 
-    //append the popup to the menu button
+    //append the popup to the menu div
     taskMenuDiv.append(editTaskPopup);
 
+    //add even listener to button to show popup
     taskMenuBtn.addEventListener('click', function(){
-        console.log("edit task");
+        console.log("menu");
         editTaskPopup.style.display = "grid";
     });
+    //append the button to the div
     taskMenuDiv.append(taskMenuBtn);
     return taskMenuDiv;
     };
@@ -48,31 +51,32 @@ function hidePopups(){
     console.log(document.querySelectorAll('.task-menu-popup'));
 
     document.querySelectorAll('.task-menu-popup').forEach(element => {
-        console.log(element);
+        //console.log(element);
         element.style.display = "none";
     });
 }
 
 //function to edit a task
 function editTask(){
-    console.log("edit task");
-    let thisTask = this.parentNode.parentNode.parentNode.childNodes;
-    //console.log(thisTask);
+    console.log("edit");
+    let thisTask = this.parentNode.parentNode.parentNode;
+    console.log(thisTask);
 
-    thisTask.forEach(element => {
-        console.log(element.textContent);
-    });
-    
 }
 
 //function to strikeout a task
 function crossoutTask(){
-    console.log("crossout task");
-
+    console.log("crossout");
+    console.log(this.parentNode.parentNode.parentNode);
+    this.parentNode.parentNode.parentNode.style.textDecoration= "line-through";
 }
 
 //function to remove a task
 function removeTask(){
-    console.log("remove task");
+    hidePopups();
+    console.log("remove");
+    let index = findTask(this.parentNode.parentNode.parentNode.id);
+    console.log(index);
+    deleteTask(index);
 
 }
