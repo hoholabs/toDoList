@@ -3,13 +3,11 @@ import { format, compareAsc } from 'date-fns';
 import { addNav } from './nav.js';
 import { addTask, createTask, newTask, createNewTaskBtn, showTasks } from './tasks';
 
-
-
 //let mainContainer = document.getElementById('main-container');
 
 addNav();
-createNewTaskBtn();
-newTask();
+showTasks();
+
 
 //ATTRIBUTES
 

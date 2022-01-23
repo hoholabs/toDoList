@@ -9,7 +9,7 @@ let mainContainer = document.getElementById('main-container');
 let navBar = document.createElement("nav");
 navBar.id = "nav"
 navBar.style.display = "grid";
-//navBar.textContent = "NAV BAR";
+navBar.textContent = "NAV BAR";
 
 // TAB BAR
 

@@ -18,7 +18,9 @@ export function createTask(name,desc,due,priority,inTab){
   
 //function to add the task to the list
 export function addTask (task){
-taskList.push(task);
+    console.log("add task");
+    taskList.push(task);
+    console.log(taskList);
 };
 
 //function to show tasklist in DOM
@@ -40,10 +42,10 @@ taskList.forEach(element => {
         // assign a classname, value, and append it to the task
         for (const prop in element) {
             if (Object.hasOwnProperty.call(element, prop)) {            
-                let input = document.createElement('input');
-                input.classList.add('task-item',prop);
-                input.value = element[prop];
-                task.append(input);              
+                let div = document.createElement('div');
+                div.classList.add('task-item',prop);
+                div.textContent = element[prop];
+                task.append(div);              
             }
         }
         //add edit button to task
@@ -57,21 +59,64 @@ taskList.forEach(element => {
 createNewTaskBtn();
 };
 
-//function to add a new blank task
+//function to add a new task
+
 export function newTask(){
-    let defaultTask = createTask('','','','',getTab());
-    addTask(defaultTask);
-    showTasks();
-};
+    //remove the new task button
+    let newTaskBtn = document.getElementById('new-task-btn');
+    newTaskBtn.remove();
+
+    //Create a task line made of inputs
+    let newTask = document.createElement('div')
+    newTask.className = 'task';    
+
+    let element = createTask('','','','','');
+
+    for (const prop in element) {
+        if (Object.hasOwnProperty.call(element, prop)) {
+            let input = document.createElement('input');
+            input.classList.add('task-item', prop)
+            input.id = `new-task-${prop}`;
+            input.value = element[prop]
+            newTask.append(input);
+        }
+    }
+
+    //adding the "OK" button
+    let okBtn = document.createElement('button');
+    okBtn.id = "ok-btn";
+    okBtn.textContent = "OK";
+    okBtn.addEventListener('click', function() {
+        console.log("ok");
+        let newTaskName = document.getElementById('new-task-name').value;
+        let newTaskDesc = document.getElementById('new-task-desc').value;
+        let newTaskDue = document.getElementById('new-task-due').value;
+        let newTaskPriority = document.getElementById('new-task-priority').value;
+        let newTaskinTab = getTab();
+        
+        let newTask = createTask(newTaskName,newTaskDesc,newTaskDue,newTaskPriority,newTaskinTab);
+        addTask(newTask);
+        showTasks();
+    });
+    newTask.append(okBtn);
+    
+
+
+    mainContainer.append(newTask);
+}
 
 //function to clear all tasks
 function clearTasks(){
+    console.log("clear started");
     const array = document.querySelectorAll('.task');
     array.forEach(element => {        
         element.remove();
     });
     let newTaskBtn = document.getElementById("new-task-btn")
+    if (newTaskBtn != null){
     newTaskBtn.remove();
+    };
+    console.log("clear finished");
 };
 
 //create the edit task button
@@ -101,6 +146,6 @@ export function createNewTaskBtn(){
 //example tasks
 
 //addTask(createTask('Task', 'Description', 'Due date', 'Priority'));
-addTask(createTask('Do the Dishes', 'Gotta wash wash wash wash', '22/04/20', '5','main'));
+//addTask(createTask('Do the Dishes', 'Gotta wash wash wash wash', '22/04/20', '5','main'));
 
 
