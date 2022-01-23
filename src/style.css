@@ -17,9 +17,6 @@
 }
 
 #nav {
-  border: solid var(--color2) 2px;
-  border-radius: 10px 25px 0px 0px;
-  background-color: var(--color3);
   border-bottom: 0;
 }
 
@@ -29,14 +26,13 @@
   -ms-grid-columns: 15vw 40vw 15vw 15vw 5vw;
       grid-template-columns: 15vw 40vw 15vw 15vw 5vw;
   border: solid var(--color2) 2px;
+  border-radius: 0px 25px 0px 0px;
   padding: 1px;
   padding-left: 5px;
   padding-right: 5px;
   height: 5vh;
   background-color: var(--color3);
   display: grid;
-  border-left: none;
-  border-right: none;
 }
 
 #tab-bar {
@@ -60,11 +56,14 @@
 
 .tab {
   border: solid purple 2px;
-  border-radius: 20px 50px 5px 5px;
+  border-radius: 30px 30px 5px 5px;
   padding-right: 10px;
   padding-left: 5px;
   height: 25px;
   line-height: 30px;
+  width: 50px;
+  margin-right: 5px;
+  text-align: center;
 }
 
 .task {
@@ -87,6 +86,10 @@
   padding: 5px;
   color: var(--color2);
   background-color: var(--color3);
+}
+
+.inTab {
+  display: none;
 }
 
 .name {

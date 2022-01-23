@@ -5,15 +5,11 @@ import { addTask, createTask, newTask, createNewTaskBtn, showTasks } from './tas
 
 
 
-let mainContainer = document.getElementById('main-container');
+//let mainContainer = document.getElementById('main-container');
 
-//clear();
 addNav();
-//addTask(createTask('Task', 'Description', 'Due date', 'Priority'));
-//newTask();
-showTasks();
 createNewTaskBtn();
-
+newTask();
 
 //ATTRIBUTES
 
