@@ -5,6 +5,12 @@ let mainContainer = document.getElementById('main-container');
 
 const taskList = [];
 
+//function to change task
+
+export function changeTask(index,prop,value){
+    taskList[index][prop] = value;
+};
+
 //function to call to make tasks
 export function createTask(name,desc,due,priority,inTab){
     return{
@@ -138,7 +144,6 @@ export function createNewTaskBtn(){
 //function to find a task by its id
 
 export function findTask(id){
-
     let index = id.slice(5);
     return index
 }
@@ -146,7 +151,6 @@ export function findTask(id){
 //function to remove a task
 
 export function deleteTask(index) {
-    console.log(index);
     taskList.splice(index, 1);
     showTasks();
 }

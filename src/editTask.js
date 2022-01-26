@@ -1,5 +1,5 @@
 import threeDots from './noun-three-dot-4287657.svg';
-import { findTask, deleteTask } from './tasks';
+import { changeTask, findTask, deleteTask, showTasks } from './tasks';
 
 //create and return the edit task button
 
@@ -37,7 +37,6 @@ export function taskMenuBtn(){
 
     //add even listener to button to show popup
     taskMenuBtn.addEventListener('click', function(){
-        console.log("menu");
         editTaskPopup.style.display = "grid";
     });
     //append the button to the div
@@ -45,10 +44,11 @@ export function taskMenuBtn(){
     return taskMenuDiv;
     };
 
+
+
 //function to hide all (task menu) popups
 function hidePopups(){
-    console.log("hide popups");
-    console.log(document.querySelectorAll('.task-menu-popup'));
+    //console.log("hide popups");
 
     document.querySelectorAll('.task-menu-popup').forEach(element => {
         //console.log(element);
@@ -58,25 +58,79 @@ function hidePopups(){
 
 //function to edit a task
 function editTask(){
-    console.log("edit");
+    hidePopups();
+
     let thisTask = this.parentNode.parentNode.parentNode;
-    console.log(thisTask);
+
+    //makes all cells editable
+    thisTask.childNodes.forEach(element => {
+        element.contentEditable = "true";   
+    });
+
+    //hide the menu button
+    let menuBtn = this.parentNode.parentNode
+    //console.log(menuBtn);
+    menuBtn.style.display = "none";
+
+    //add "OK" button
+    let okBtn = document.createElement("button");
+    okBtn.textContent = "OK";
+    okBtn.id = 'task-edit-ok-btn';
+    thisTask.append(okBtn);
+
+    //add function to ok button to do stuff
+    okBtn.addEventListener('click', function(){
+        //make thisTask content not editable
+        thisTask.childNodes.forEach(element => {
+            element.contentEditable = "false";   
+        });
+        //save the edited data to the tasklist
+        //console.log(findTask(thisTask.id));
+        //console.log(thisTask.childNodes);
+        //showTaskList();
+        //console.log(thisTask.querySelectorAll('.task-item'));
+        //console.log(thisTask.querySelectorAll('.task-item')[0].textContent);
+        // thisTask.querySelectorAll('.task-item').forEach(element => {
+        //     console.log(element.textContent);
+        //     console.log(element);
+            
+        // });
+        let index = findTask(thisTask.id)
+        let name = thisTask.querySelectorAll('.task-item')[0].textContent
+        let desc = thisTask.querySelectorAll('.task-item')[1].textContent
+        let due = thisTask.querySelectorAll('.task-item')[2].textContent
+        let priority = thisTask.querySelectorAll('.task-item')[3].textContent
+
+        changeTask(index,'name',name);
+        changeTask(index,'desc',desc);
+        changeTask(index,'due',due);
+        changeTask(index,'priority',priority);
+
+        //showTasks();
+
+        //remove the ok button
+        document.getElementById('task-edit-ok-btn').remove();
+        //show menu button again
+        menuBtn.style.display = "block";
+    });
+
 
 }
 
 //function to strikeout a task
 function crossoutTask(){
-    console.log("crossout");
-    console.log(this.parentNode.parentNode.parentNode);
+    hidePopups();
+
+    //console.log("crossout");
+    // console.log(this.parentNode.parentNode.parentNode);
     this.parentNode.parentNode.parentNode.style.textDecoration= "line-through";
 }
 
 //function to remove a task
 function removeTask(){
     hidePopups();
-    console.log("remove");
+
     let index = findTask(this.parentNode.parentNode.parentNode.id);
-    console.log(index);
     deleteTask(index);
 
 }
