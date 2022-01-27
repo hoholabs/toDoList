@@ -3,7 +3,21 @@ import { taskMenuBtn } from './editTask.js';
 
 let mainContainer = document.getElementById('main-container');
 
-const taskList = [];
+Storage.prototype.setObj = function(key, obj) {
+    return this.setItem(key, JSON.stringify(obj))
+}
+Storage.prototype.getObj = function(key) {
+    return JSON.parse(this.getItem(key))
+}
+
+let taskList = [];
+//function to overwrite taskList
+
+export function setTaskList(newTaskList){
+    taskList = newTaskList;
+    console.log(taskList);
+    showTasks();
+}
 
 //function to change task
 
@@ -24,10 +38,23 @@ export function createTask(name,desc,due,priority,inTab){
   
 //function to add the task to the list
 export function addTask (task){
-    //console.log("add task");
+    console.log(taskList);
     taskList.push(task);
-    //console.log(taskList);
+    saveTaskList();
+    console.log(localStorage);
+    console.log(localStorage.getObj('taskList'));
+
+    //console.log(importlist);
+
 };
+
+//function to write tasklist to local storage
+
+export function saveTaskList(){
+    localStorage.setObj('taskList', taskList);
+}
+
+
 
 //function to show tasklist in DOM
 

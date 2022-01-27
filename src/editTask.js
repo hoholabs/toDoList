@@ -1,5 +1,5 @@
 import threeDots from './noun-three-dot-4287657.svg';
-import { changeTask, findTask, deleteTask, showTasks } from './tasks';
+import { changeTask, findTask, deleteTask, saveTaskList } from './tasks';
 
 //create and return the edit task button
 
@@ -85,16 +85,9 @@ function editTask(){
             element.contentEditable = "false";   
         });
         //save the edited data to the tasklist
-        //console.log(findTask(thisTask.id));
-        //console.log(thisTask.childNodes);
-        //showTaskList();
-        //console.log(thisTask.querySelectorAll('.task-item'));
-        //console.log(thisTask.querySelectorAll('.task-item')[0].textContent);
-        // thisTask.querySelectorAll('.task-item').forEach(element => {
-        //     console.log(element.textContent);
-        //     console.log(element);
-            
-        // });
+
+        //brute forced.. ugly.. fix later
+
         let index = findTask(thisTask.id)
         let name = thisTask.querySelectorAll('.task-item')[0].textContent
         let desc = thisTask.querySelectorAll('.task-item')[1].textContent
@@ -112,6 +105,7 @@ function editTask(){
         document.getElementById('task-edit-ok-btn').remove();
         //show menu button again
         menuBtn.style.display = "block";
+        saveTaskList();
     });
 
 
@@ -132,5 +126,6 @@ function removeTask(){
 
     let index = findTask(this.parentNode.parentNode.parentNode.id);
     deleteTask(index);
+    saveTaskList();
 
 }

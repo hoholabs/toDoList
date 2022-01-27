@@ -30,9 +30,11 @@
   padding: 1px;
   padding-left: 5px;
   padding-right: 5px;
-  height: 5vh;
+  height: 30px;
   background-color: var(--color3);
   display: grid;
+  -ms-flex-line-pack: center;
+      align-content: center;
 }
 
 #tab-bar {
@@ -76,8 +78,10 @@
   padding: 1px;
   padding-left: 5px;
   padding-right: 5px;
-  height: 5vh;
+  height: 30px;
   background-color: var(--color3);
+  -ms-flex-line-pack: center;
+      align-content: center;
 }
 
 .task-item {
@@ -128,7 +132,7 @@
 }
 
 #new-task-btn {
-  height: 5vh;
+  height: 30px;
   background-color: var(--color3);
   border: solid var(--color2) 2px;
   border-top: 0;
