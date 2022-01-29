@@ -1,5 +1,5 @@
 import { getTab } from './nav.js';
-import { taskMenuBtn, expandBtn, priorityDropdown} from './editTask.js';
+import { taskMenuBtn, expandBtn, priorityDropdown, colorPriority} from './editTask.js';
 
 let mainContainer = document.getElementById('main-container');
 
@@ -92,8 +92,12 @@ taskList.forEach(element => {
 
         //assign each task an id
         task.id = `task-${i}`;
-        
-        
+
+        //color the priority
+        let color = colorPriority(element.priority);
+        let priority = task.querySelector('.priority');
+        priority.style.cssText = `background-color: ${color}; color: ${color}`
+
         //adds the task at the bottom of the main container
         mainContainer.append(task);
     }

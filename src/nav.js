@@ -18,9 +18,10 @@ let tabBar = document.createElement("div");
 tabBar.id = "tab-bar";
 //tabBar.textContent = "TAB BAR";
     //create new tab button
-    let newTabBtn = document.createElement('button');
+    let newTabBtn = document.createElement('i');
     newTabBtn.id = "new-tab-button";
-    newTabBtn.textContent = "+";
+    newTabBtn.classList.add('material-icons');
+    newTabBtn.textContent = 'add_circle_outline';
     tabBar.append(newTabBtn);
     //give new tab busson functionalty
     newTabBtn.addEventListener('click',newTabPrompt);

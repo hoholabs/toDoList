@@ -1,5 +1,5 @@
 import threeDots from './noun-three-dot-4287657.svg';
-import { changeTask, findTask, deleteTask, saveTaskList } from './tasks';
+import { changeTask, findTask, deleteTask, saveTaskList, showTasks } from './tasks';
 
 //create and return the edit task button
 
@@ -8,8 +8,11 @@ export function taskMenuBtn(){
     taskMenuDiv.classList.add('task-menu-button');
     const taskMenuBtn = document.createElement('button');
     taskMenuBtn.classList.add('task-menu-button');
-    const editIcon = new Image();
-    editIcon.src = threeDots;
+    const editIcon = document.createElement('i');
+    editIcon.classList.add('material-icons');
+    editIcon.textContent  = 'menu';
+    // const editIcon = new Image();
+    // editIcon.src = threeDots;
     taskMenuBtn.append(editIcon);
 
     //create task popup
@@ -87,9 +90,10 @@ function editTask(){
     menuBtn.style.display = "none";
 
     //add "OK" button
-    let okBtn = document.createElement("button");
-    okBtn.textContent = "OK";
+    let okBtn = document.createElement('i');
+    okBtn.textContent = "done";
     okBtn.id = 'task-edit-ok-btn';
+    okBtn.classList.add('material-icons');
     thisTask.append(okBtn);
 
     //add function to ok button to do stuff
@@ -120,7 +124,10 @@ function editTask(){
         document.getElementById('task-edit-ok-btn').remove();
         //show menu button again
         menuBtn.style.display = "block";
+
         saveTaskList();
+        showTasks();
+
     });
 
 
@@ -142,9 +149,14 @@ function removeTask(){
 
 }
 
+export function colorPriority(num){
+    let colors = ['red','orange','yellow','green','blue','white'];
+    return colors[num];
+
+}
 
 export function priorityDropdown(){
-    let colors = ['red','orange','yellow','green','blue'];
+    let colors = ['red','orange','yellow','green','blue','white'];
 
     let dropDown = document.createElement('div')
 
