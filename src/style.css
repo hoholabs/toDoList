@@ -23,8 +23,8 @@
 #title-bar {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 1fr 1fr 5vw;
-      grid-template-columns: 1fr 1fr 1fr 5vw;
+  -ms-grid-columns: 1fr .5fr .5fr 5vw;
+      grid-template-columns: 1fr .5fr .5fr 5vw;
   border: solid var(--color2) 2px;
   border-radius: 0px 25px 0px 0px;
   padding: 1px;
@@ -71,8 +71,8 @@
 .task {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 1fr 1fr 5vw;
-      grid-template-columns: 1fr 1fr 1fr 5vw;
+  -ms-grid-columns: 1fr .5fr .5fr 5vw;
+      grid-template-columns: 1fr .5fr .5fr 5vw;
   border: solid var(--color2) 2px;
   border-top: 0;
   padding: 1px;
@@ -81,15 +81,16 @@
   background-color: var(--color3);
   -ms-flex-line-pack: center;
       align-content: center;
+  width: 80vw;
 }
 
 .task-item {
-  border: none;
   border-radius: 5px;
   padding: 5px;
   color: var(--color2);
   background-color: var(--color3);
   margin: 1px;
+  border: solid var(--color3) 1px;
 }
 
 .inTab {
@@ -104,6 +105,7 @@
 .desc {
   display: none;
   text-align: left;
+  width: 1fr;
   -ms-grid-row: 2;
       grid-row-start: 2;
   -ms-grid-column: 1;
@@ -115,7 +117,6 @@
 
 .show-desc {
   display: inline;
-  padding: 5px;
 }
 
 .editing {
@@ -133,18 +134,30 @@
 }
 
 .task-menu-button {
-  width: 4vw;
+  width: MIN(30px, 5vw);
   border: none;
   border-radius: 1vw;
-  background-color: var(--color1);
+  background-color: var(--color3);
   color: var(--color2);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .task-menu-button img {
-  width: 2vw;
+  width: MIN(20px, 3vw);
   -o-object-fit: cover;
      object-fit: cover;
-  vertical-align: middle;
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 #new-task-btn {
@@ -164,5 +177,11 @@
   right: 50px;
   position: absolute;
   display: none;
+}
+
+.task-edit-popup-btn {
+  background-color: var(--color3);
+  border: none;
+  border-radius: 10px;
 }
 /*# sourceMappingURL=style.css.map */

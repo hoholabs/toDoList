@@ -5,6 +5,7 @@ import { changeTask, findTask, deleteTask, saveTaskList } from './tasks';
 
 export function taskMenuBtn(){
     const taskMenuDiv = document.createElement('div');
+    taskMenuDiv.classList.add('task-menu-button');
     const taskMenuBtn = document.createElement('button');
     taskMenuBtn.classList.add('task-menu-button');
     const editIcon = new Image();
@@ -20,16 +21,19 @@ export function taskMenuBtn(){
     let taskEditBtn = document.createElement('button');
     taskEditBtn.textContent = "edit";
     taskEditBtn.addEventListener('click', editTask)
+    taskEditBtn.classList.add('task-edit-popup-btn');
     editTaskPopup.append(taskEditBtn)
 
     let taskCrossBtn = document.createElement('button');
     taskCrossBtn.textContent = "cross-out";
     taskCrossBtn.addEventListener('click', crossoutTask);
+    taskCrossBtn.classList.add('task-edit-popup-btn');
     editTaskPopup.append(taskCrossBtn)
 
     let taskRemoveBtn = document.createElement('button');
     taskRemoveBtn.textContent = "remove";
     taskRemoveBtn.addEventListener('click', removeTask);
+    taskRemoveBtn.classList.add('task-edit-popup-btn');
     editTaskPopup.append(taskRemoveBtn)
 
     //append the popup to the menu div
@@ -38,6 +42,11 @@ export function taskMenuBtn(){
     //add even listener to button to show popup
     taskMenuBtn.addEventListener('click', function(){
         editTaskPopup.style.display = "grid";
+    });
+
+    //add event listener to hide popup on mouseleave
+    editTaskPopup.addEventListener('mouseleave', function(){
+        editTaskPopup.style.display = "none";
     });
     //append the button to the div
     taskMenuDiv.append(taskMenuBtn);
