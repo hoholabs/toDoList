@@ -6,6 +6,7 @@ import { setTaskList, createTask, newTask, createNewTaskBtn, showTasks } from '.
 //let mainContainer = document.getElementById('main-container');
 
 addNav();
+//localStorage.clear()
 //addTask(createTask("example1","description1","1/1/2021","1","main"));
 //addTask(createTask("example2","description2","1/2/2021","2","main"));
 showTasks();

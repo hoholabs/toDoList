@@ -3,7 +3,7 @@ import { changeTask, findTask, deleteTask, saveTaskList, showTasks } from './tas
 
 //create and return the edit task button
 
-export function taskMenuBtn(){
+export function taskMenuBtn(taskId){
     const taskMenuDiv = document.createElement('div');
     taskMenuDiv.classList.add('task-menu-button');
     const taskMenuBtn = document.createElement('button');
@@ -11,8 +11,6 @@ export function taskMenuBtn(){
     const editIcon = document.createElement('i');
     editIcon.classList.add('material-icons');
     editIcon.textContent  = 'menu';
-    // const editIcon = new Image();
-    // editIcon.src = threeDots;
     taskMenuBtn.append(editIcon);
 
     //create task popup
@@ -23,7 +21,7 @@ export function taskMenuBtn(){
 
     let taskEditBtn = document.createElement('button');
     taskEditBtn.textContent = "edit";
-    taskEditBtn.addEventListener('click', editTask)
+    taskEditBtn.addEventListener('click', () =>{editTask(taskId);});
     taskEditBtn.classList.add('task-edit-popup-btn');
     editTaskPopup.append(taskEditBtn)
 
@@ -69,10 +67,12 @@ function hidePopups(){
 }
 
 //function to edit a task
-function editTask(){
+export function editTask(taskId){
     hidePopups();
 
-    let thisTask = this.parentNode.parentNode.parentNode;
+    //let thisTask = this.parentNode.parentNode.parentNode;
+    let thisTask = document.getElementById(taskId);
+    //console.log(thisTask);
 
     //makes all cells editable
     thisTask.childNodes.forEach(element => {
@@ -85,7 +85,8 @@ function editTask(){
     thisDesc.classList.add('show-desc');
 
     //hide the menu button
-    let menuBtn = this.parentNode.parentNode
+    let menuBtn = thisTask.querySelector('.task-menu-button');
+
     //console.log(menuBtn);
     menuBtn.style.display = "none";
 
@@ -149,6 +150,7 @@ function removeTask(){
 
 }
 
+//function to return a color based on priority
 export function colorPriority(num){
     let colors = ['red','orange','yellow','green','blue','white'];
     return colors[num];
@@ -156,13 +158,13 @@ export function colorPriority(num){
 }
 
 export function priorityDropdown(){
-    let colors = ['red','orange','yellow','green','blue','white'];
+    
 
     let dropDown = document.createElement('div')
 
     for (let index = 0; index < colors.length; index++) {
         let button = document.createElement('button')
-        button.style.backgroundColor = colors[index];
+        button.style.backgroundColor = colorPriority(index);
         dropDown.append(button);
     }
 
