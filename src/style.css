@@ -71,8 +71,8 @@
 .task {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr .5fr .5fr 5vw;
-      grid-template-columns: 1fr .5fr .5fr 5vw;
+  -ms-grid-columns: 3vw 1fr .5fr .5fr 5vw;
+      grid-template-columns: 3vw 1fr .5fr .5fr 5vw;
   border: solid var(--color2) 2px;
   border-top: 0;
   padding: 1px;

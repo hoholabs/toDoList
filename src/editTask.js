@@ -157,3 +157,17 @@ export function priorityDropdown(){
     return dropDown;
 
 }
+
+export function expandBtn(){
+    let expandButton = document.createElement('i');
+    expandButton.classList.add('material-icons', 'expand-button');
+    expandButton.textContent = 'expand_more';
+    expandButton.addEventListener('click', function(){
+        let thisTask = this.parentNode;
+        //toggle "show description"
+        thisTask.querySelector('.desc').classList.toggle('show-desc')
+        //toggle icon
+        this.textContent == 'expand_more' ? this.textContent = 'expand_less' : this.textContent = 'expand_more'; 
+    })
+    return expandButton;
+}

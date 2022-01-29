@@ -1,5 +1,5 @@
 import { getTab } from './nav.js';
-import { taskMenuBtn, priorityDropdown} from './editTask.js';
+import { taskMenuBtn, expandBtn, priorityDropdown} from './editTask.js';
 
 let mainContainer = document.getElementById('main-container');
 
@@ -39,11 +39,11 @@ export function createTask(name,desc,due,priority,inTab){
   
 //function to add the task to the list
 export function addTask (task){
-    console.log(taskList);
+    //console.log(taskList);
     taskList.push(task);
     saveTaskList();
-    console.log(localStorage);
-    console.log(localStorage.getObj('taskList'));
+    //console.log(localStorage);
+    //console.log(localStorage.getObj('taskList'));
 
     //console.log(importlist);
 
@@ -73,6 +73,9 @@ taskList.forEach(element => {
         //creates a div for the task
         let task = document.createElement('div')
         task.className = 'task';    
+
+        //append expand button
+        task.append(expandBtn());
 
         //loops through each element in the object to create an input,
         // assign a classname, value, and append it to the task
