@@ -1,8 +1,9 @@
 import { getTab } from './nav.js';
-import { taskMenuBtn } from './editTask.js';
+import { taskMenuBtn, priorityDropdown} from './editTask.js';
 
 let mainContainer = document.getElementById('main-container');
 
+//extend functionality of local storage to allow for arrays and objects
 Storage.prototype.setObj = function(key, obj) {
     return this.setItem(key, JSON.stringify(obj))
 }
@@ -15,7 +16,7 @@ let taskList = [];
 
 export function setTaskList(newTaskList){
     taskList = newTaskList;
-    console.log(taskList);
+    //sconsole.log(taskList);
     showTasks();
 }
 
@@ -63,10 +64,10 @@ clearTasks();
 //i to track which index of taskList code is checking
 var i=0
 
+//look through every element of the trasklist
 taskList.forEach(element => {
-    //console.log(getTab());
-    //console.log(element.inTab);
 
+    // if the current task's 'intab' is the same as current tab
     if(element.inTab == getTab()){
 
         //creates a div for the task
@@ -92,9 +93,10 @@ taskList.forEach(element => {
         
         //adds the task at the bottom of the main container
         mainContainer.append(task);
-        }
+    }
+    
     i++
-    });
+});
 
 createNewTaskBtn();
 };
@@ -181,3 +183,5 @@ export function deleteTask(index) {
     taskList.splice(index, 1);
     showTasks();
 }
+
+

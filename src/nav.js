@@ -71,6 +71,8 @@ export function getTab(){
 let titleBar = document.createElement('div')
 titleBar.id = 'title-bar';
 let titles = createTask('Task', 'Description', 'Due date', 'Priority','none');
+delete titles.desc;
+//console.log(titles);
 
 for (const prop in titles) {
     if (Object.hasOwnProperty.call(titles, prop)) {

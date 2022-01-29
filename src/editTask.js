@@ -64,8 +64,13 @@ function editTask(){
 
     //makes all cells editable
     thisTask.childNodes.forEach(element => {
-        element.contentEditable = "true";   
+        element.contentEditable = "true";
+        element.classList.add('editing'); 
     });
+
+    //shows description
+    let thisDesc = thisTask.querySelector('.desc');
+    thisDesc.classList.add('show-desc');
 
     //hide the menu button
     let menuBtn = this.parentNode.parentNode
@@ -82,7 +87,8 @@ function editTask(){
     okBtn.addEventListener('click', function(){
         //make thisTask content not editable
         thisTask.childNodes.forEach(element => {
-            element.contentEditable = "false";   
+            element.contentEditable = "false";
+            element.classList.remove('editing');    
         });
         //save the edited data to the tasklist
 
@@ -99,7 +105,7 @@ function editTask(){
         changeTask(index,'due',due);
         changeTask(index,'priority',priority);
 
-        //showTasks();
+        thisDesc.classList.remove('show-desc');
 
         //remove the ok button
         document.getElementById('task-edit-ok-btn').remove();
@@ -114,9 +120,6 @@ function editTask(){
 //function to strikeout a task
 function crossoutTask(){
     hidePopups();
-
-    //console.log("crossout");
-    // console.log(this.parentNode.parentNode.parentNode);
     this.parentNode.parentNode.parentNode.style.textDecoration= "line-through";
 }
 
@@ -127,5 +130,21 @@ function removeTask(){
     let index = findTask(this.parentNode.parentNode.parentNode.id);
     deleteTask(index);
     saveTaskList();
+
+}
+
+
+export function priorityDropdown(){
+    let colors = ['red','orange','yellow','green','blue'];
+
+    let dropDown = document.createElement('div')
+
+    for (let index = 0; index < colors.length; index++) {
+        let button = document.createElement('button')
+        button.style.backgroundColor = colors[index];
+        dropDown.append(button);
+    }
+
+    return dropDown;
 
 }

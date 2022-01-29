@@ -23,8 +23,8 @@
 #title-bar {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 15vw 40vw 15vw 15vw 5vw;
-      grid-template-columns: 15vw 40vw 15vw 15vw 5vw;
+  -ms-grid-columns: 1fr 1fr 1fr 5vw;
+      grid-template-columns: 1fr 1fr 1fr 5vw;
   border: solid var(--color2) 2px;
   border-radius: 0px 25px 0px 0px;
   padding: 1px;
@@ -71,14 +71,13 @@
 .task {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 15vw 40vw 15vw 15vw 5vw;
-      grid-template-columns: 15vw 40vw 15vw 15vw 5vw;
+  -ms-grid-columns: 1fr 1fr 1fr 5vw;
+      grid-template-columns: 1fr 1fr 1fr 5vw;
   border: solid var(--color2) 2px;
   border-top: 0;
   padding: 1px;
   padding-left: 5px;
   padding-right: 5px;
-  height: 30px;
   background-color: var(--color3);
   -ms-flex-line-pack: center;
       align-content: center;
@@ -86,10 +85,11 @@
 
 .task-item {
   border: none;
-  border-radius: 50px;
+  border-radius: 5px;
   padding: 5px;
   color: var(--color2);
   background-color: var(--color3);
+  margin: 1px;
 }
 
 .inTab {
@@ -98,22 +98,38 @@
 
 .name {
   text-align: left;
-  width: 13vw;
+  width: 20vw;
 }
 
 .desc {
+  display: none;
   text-align: left;
-  width: 38vw;
+  -ms-grid-row: 2;
+      grid-row-start: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-column: 1/4;
+  padding: 0;
+  word-wrap: break-word;
+}
+
+.show-desc {
+  display: inline;
+  padding: 5px;
+}
+
+.editing {
+  border: solid var(--color2) 1px;
 }
 
 .due {
   text-align: center;
-  width: 13vw;
+  width: 20vw;
 }
 
 .priority {
   text-align: center;
-  width: 13vw;
+  width: 20vw;
 }
 
 .task-menu-button {
