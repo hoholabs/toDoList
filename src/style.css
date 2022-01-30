@@ -38,6 +38,13 @@
       align-content: center;
 }
 
+.title-item {
+  background-color: var(--color3);
+  color: var(--color2);
+  border: none;
+  border-radius: 10px;
+}
+
 #tab-bar {
   display: -webkit-box;
   display: -ms-flexbox;

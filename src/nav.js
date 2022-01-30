@@ -66,23 +66,28 @@ export function getTab(){
     return currentTab;
 }
 
-// TITLE BAR
+// TITLE BAR ///
 
 //create title bar
 let titleBar = document.createElement('div')
 titleBar.id = 'title-bar';
 let titles = createTask('Task', 'Description', 'Due date', 'Priority','none');
 delete titles.desc;
-//console.log(titles);
 
-//div for first grid slot
 
-titleBar.append(document.createElement('div'));
+//title bar tab menu button
+let tabMenu = document.createElement('button');
+tabMenu.className = "title-item";
+let tabMenuIcon = document.createElement('i');
+tabMenuIcon.className = 'material-icons';
+tabMenuIcon.textContent = 'menu';
+tabMenu.append(tabMenuIcon);
+titleBar.append(tabMenu);
 
 for (const prop in titles) {
     if (Object.hasOwnProperty.call(titles, prop)) {
         let div = document.createElement('div');
-        div.classList.add("tab-item", prop)
+        div.classList.add("title-item", prop)
         div.textContent = titles[prop]
         titleBar.append(div);
     }
