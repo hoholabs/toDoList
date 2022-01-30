@@ -8,10 +8,10 @@ export function taskMenuBtn(taskId){
     taskMenuDiv.classList.add('task-menu-button');
     const taskMenuBtn = document.createElement('button');
     taskMenuBtn.classList.add('task-menu-button');
-    const editIcon = document.createElement('i');
-    editIcon.classList.add('material-icons');
-    editIcon.textContent  = 'menu';
-    taskMenuBtn.append(editIcon);
+    const menuIcon = document.createElement('i');
+    menuIcon.classList.add('material-icons');
+    menuIcon.textContent  = 'menu';
+    taskMenuBtn.append(menuIcon);
 
     //create task popup
     let editTaskPopup = document.createElement('div');
@@ -19,22 +19,34 @@ export function taskMenuBtn(taskId){
 
     //add menu buttons to the popup
 
+
     let taskEditBtn = document.createElement('button');
-    taskEditBtn.textContent = "edit";
     taskEditBtn.addEventListener('click', () =>{editTask(taskId);});
-    taskEditBtn.classList.add('task-edit-popup-btn');
+    taskEditBtn.classList.add('task-menu-popup-btn');
+    let taskEditIcon = document.createElement('i');
+    taskEditIcon.textContent = "edit";
+    taskEditIcon.className = 'material-icons';
+    taskEditBtn.append(taskEditIcon);
     editTaskPopup.append(taskEditBtn)
 
+
     let taskCrossBtn = document.createElement('button');
-    taskCrossBtn.textContent = "cross-out";
     taskCrossBtn.addEventListener('click', crossoutTask);
-    taskCrossBtn.classList.add('task-edit-popup-btn');
+    taskCrossBtn.classList.add('task-menu-popup-btn');
+    let taskCrossIcon =  document.createElement('i');
+    taskCrossIcon.className = 'material-icons';
+    taskCrossIcon.textContent = 'strikethrough_s';
+    taskCrossBtn.append(taskCrossIcon);
     editTaskPopup.append(taskCrossBtn)
 
+
     let taskRemoveBtn = document.createElement('button');
-    taskRemoveBtn.textContent = "remove";
     taskRemoveBtn.addEventListener('click', () => {removeTask(taskId);});
-    taskRemoveBtn.classList.add('task-edit-popup-btn');
+    taskRemoveBtn.classList.add('task-menu-popup-btn');
+    let taskRemoveIcon =  document.createElement('i');
+    taskRemoveIcon.className = 'material-icons';
+    taskRemoveIcon.textContent = 'delete';
+    taskRemoveBtn.append(taskRemoveIcon);
     editTaskPopup.append(taskRemoveBtn)
 
     //append the popup to the menu div
