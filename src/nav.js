@@ -75,6 +75,10 @@ let titles = createTask('Task', 'Description', 'Due date', 'Priority','none');
 delete titles.desc;
 //console.log(titles);
 
+//div for first grid slot
+
+titleBar.append(document.createElement('div'));
+
 for (const prop in titles) {
     if (Object.hasOwnProperty.call(titles, prop)) {
         let div = document.createElement('div');
@@ -83,6 +87,31 @@ for (const prop in titles) {
         titleBar.append(div);
     }
 }
+
+//change name to icon
+let name = titleBar.querySelector('.name');
+name.textContent = "";
+let title = document.createElement('i');
+title.textContent = "title";
+title.classList.add('material-icons');
+name.append(title);
+
+//change priority to icon
+let priority = titleBar.querySelector('.priority');
+priority.textContent = "";
+let label = document.createElement('i');
+label.textContent = "label";
+label.classList.add('material-icons');
+priority.append(label);
+
+//change due date icon
+let due = titleBar.querySelector('.due');
+due.textContent = "";
+let event = document.createElement('i');
+event.textContent = "event";
+event.classList.add('material-icons');
+due.append(event);
+
 navBar.append(titleBar);
 
 

@@ -74,8 +74,10 @@ export function editTask(taskId){
     let thisTask = document.getElementById(taskId);
     //console.log(thisTask);
 
-    //makes all cells editable
-    thisTask.childNodes.forEach(element => {
+    let textFields = thisTask.querySelectorAll('.name, .desc, .due')
+
+    //makes all textfields editable
+    textFields.forEach(element => {
         element.contentEditable = "true";
         element.classList.add('editing'); 
     });
@@ -84,11 +86,20 @@ export function editTask(taskId){
     let thisDesc = thisTask.querySelector('.desc');
     thisDesc.classList.add('show-desc');
 
-    //hide the menu button
+    //hide the menu button and expand button
     let menuBtn = thisTask.querySelector('.task-menu-button');
-
-    //console.log(menuBtn);
+    let expBtn = thisTask.querySelector('.expand-button');
     menuBtn.style.display = "none";
+    expBtn.style.color = "var(--color3)";
+
+    //make label interactive //////////////////////////////////////
+    let thisLabel = thisTask.querySelector('.label');
+    let thisLabelDiv = thisTask.querySelector('.label-div');
+    console.log(thisLabel);
+    thisLabel.addEventListener('click', function(event){
+        event.preventDefault();
+        thisLabelDiv.append(labelDropdown());
+    })
 
     //add "OK" button
     let okBtn = document.createElement('i');
@@ -99,8 +110,8 @@ export function editTask(taskId){
 
     //add function to ok button to do stuff
     okBtn.addEventListener('click', function(){
-        //make thisTask content not editable
-        thisTask.childNodes.forEach(element => {
+        //make taskfields content not editable
+        textFields.forEach(element => {
             element.contentEditable = "false";
             element.classList.remove('editing');    
         });
@@ -123,8 +134,9 @@ export function editTask(taskId){
 
         //remove the ok button
         document.getElementById('task-edit-ok-btn').remove();
-        //show menu button again
+        //show menu and expand button again
         menuBtn.style.display = "block";
+        expBtn.style.color = "var(--color2)";
 
         saveTaskList();
         showTasks();
@@ -157,15 +169,33 @@ export function colorPriority(num){
 
 }
 
-export function priorityDropdown(){
+export function labelDropdown(){
     
 
     let dropDown = document.createElement('div')
+    dropDown.id = "label-dropdown";
 
-    for (let index = 0; index < colors.length; index++) {
-        let button = document.createElement('button')
-        button.style.backgroundColor = colorPriority(index);
-        dropDown.append(button);
+    for (let index = 0; index < 6; index++) {
+        let label = document.createElement('i')
+        label.classList.add('material-icons')
+        label.textContent = 'label';
+        label.style.color = colorPriority(index);
+        label.id = `label-${index}`
+
+        label.addEventListener('click',function (event){
+            event.preventDefault();
+            let thisTask = this.parentElement.parentElement.parentElement;
+            let newLabel = this.id.slice(6)
+            //change label to new label number
+            thisTask.querySelector('.priority').textContent = newLabel;
+            //change label color for style points  
+            thisTask.querySelector('.label').style.color = colorPriority(newLabel);
+            // remove the dropdown
+            document.getElementById('label-dropdown').remove();
+        })
+
+        console.log("appended");
+        dropDown.append(label);
     }
 
     return dropDown;

@@ -82,18 +82,31 @@ taskList.forEach(element => {
                 task.append(div);              
             }
         }
+
+        
         //assign each task an id
         task.id = `task-${i}`;
+
+        //add a label
+
+
+            //color the priority
+        let color = colorPriority(element.priority);
+        let label = document.createElement('i');
+        label.classList.add('material-icons','label');
+        label.textContent = "label";
+        label.style.color = color;
+        const labelDiv = document.createElement('div')
+        labelDiv.classList.add('label-div');
+        labelDiv.append(label);
+        task.append(labelDiv);
 
         //add menu button to task
         task.append(taskMenuBtn(`task-${i}`));
 
-
-
-        //color the priority
-        let color = colorPriority(element.priority);
-        let priority = task.querySelector('.priority');
-        priority.style.cssText = `background-color: ${color}; color: ${color}`
+        
+        //priority.style.color = color;
+        //priority.style.cssText = `background-color: ${color}; color: ${color}`
 
         //adds the task at the bottom of the main container
         mainContainer.append(task);
@@ -105,7 +118,7 @@ taskList.forEach(element => {
 createNewTaskBtn();
 };
 
-//function to add a new task ////////////////////////////////////////////
+//function to add a new task 
 
 export function newTask(){
     //create blank task and then edit it
@@ -116,51 +129,6 @@ export function newTask(){
     //console.log(taskList.length-1);
     editTask(`task-${taskList.length-1}`);
 }
-
-//old newTask
-// export function newTask(){
-//     //remove the new task button
-//     let newTaskBtn = document.getElementById('new-task-btn');
-//     newTaskBtn.remove();
-
-//     //Create a task line made of inputs
-//     let newTask = document.createElement('div')
-//     newTask.className = 'task';    
-
-//     let element = createTask('','','','','');
-
-//     for (const prop in element) {
-//         if (Object.hasOwnProperty.call(element, prop)) {
-//             let input = document.createElement('input');
-//             input.classList.add('task-item', prop)
-//             input.id = `new-task-${prop}`;
-//             input.value = element[prop]
-//             newTask.append(input);
-//         }
-//     }
-
-//     //adding the "OK" button
-//     let okBtn = document.createElement('button');
-//     okBtn.id = "ok-btn";
-//     okBtn.textContent = "OK";
-//     okBtn.addEventListener('click', function() {
-//         //console.log("ok");
-//         let newTaskName = document.getElementById('new-task-name').value;
-//         let newTaskDesc = document.getElementById('new-task-desc').value;
-//         let newTaskDue = document.getElementById('new-task-due').value;
-//         let newTaskPriority = document.getElementById('new-task-priority').value;
-//         let newTaskinTab = getTab();
-        
-//         let newTask = createTask(newTaskName,newTaskDesc,newTaskDue,newTaskPriority,newTaskinTab);
-//         addTask(newTask);
-//         showTasks();
-//     });
-//     newTask.append(okBtn);
-    
-
-
-//     mainContainer.append(newTask);
-// }
 
 //function to clear all tasks
 function clearTasks(){
