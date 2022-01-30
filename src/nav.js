@@ -82,7 +82,7 @@ titleBar.append(document.createElement('div'));
 for (const prop in titles) {
     if (Object.hasOwnProperty.call(titles, prop)) {
         let div = document.createElement('div');
-        div.classList.add("task-item", prop)
+        div.classList.add("tab-item", prop)
         div.textContent = titles[prop]
         titleBar.append(div);
     }
@@ -96,14 +96,6 @@ title.textContent = "title";
 title.classList.add('material-icons');
 name.append(title);
 
-//change priority to icon
-let priority = titleBar.querySelector('.priority');
-priority.textContent = "";
-let label = document.createElement('i');
-label.textContent = "label";
-label.classList.add('material-icons');
-priority.append(label);
-
 //change due date icon
 let due = titleBar.querySelector('.due');
 due.textContent = "";
@@ -111,6 +103,12 @@ let event = document.createElement('i');
 event.textContent = "event";
 event.classList.add('material-icons');
 due.append(event);
+
+//add label icon
+let label = document.createElement('i');
+label.textContent = "label";
+label.classList.add('material-icons');
+titleBar.append(label);
 
 navBar.append(titleBar);
 

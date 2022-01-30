@@ -33,7 +33,7 @@ export function taskMenuBtn(taskId){
 
     let taskRemoveBtn = document.createElement('button');
     taskRemoveBtn.textContent = "remove";
-    taskRemoveBtn.addEventListener('click', removeTask);
+    taskRemoveBtn.addEventListener('click', () => {removeTask(taskId);});
     taskRemoveBtn.classList.add('task-edit-popup-btn');
     editTaskPopup.append(taskRemoveBtn)
 
@@ -153,18 +153,23 @@ function crossoutTask(){
 }
 
 //function to remove a task
-function removeTask(){
+function removeTask(id){
     hidePopups();
-
-    let index = findTask(this.parentNode.parentNode.parentNode.id);
-    deleteTask(index);
+    deleteTask(findTask(id));
     saveTaskList();
 
 }
 
 //function to return a color based on priority
 export function colorPriority(num){
-    let colors = ['red','orange','yellow','green','blue','white'];
+    let colors = [
+        'red',      //0
+        'orange',   //1
+        'yellow',   //2
+        'green',    //3
+        'blue',     //4
+        'white'     //5
+    ];
     return colors[num];
 
 }
