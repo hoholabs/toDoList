@@ -26,13 +26,14 @@ export function changeTask(index,prop,value){
 };
 
 //function to call to make tasks
-export function createTask(name,desc,due,priority,inTab){
+export function createTask(name,desc,due,priority,inTab,strike){
     return{
       name:name,
       desc:desc,
       due:due,
       priority:priority,
-      inTab:inTab
+      inTab:inTab,
+      strike:strike
     }
   }
   
@@ -82,6 +83,9 @@ taskList.forEach(element => {
             }
         }
 
+        //adds strikethrough
+        let strike = task.querySelector('.strike').textContent;
+        if (strike == "true") {task.style.textDecoration= "line-through"};
         
         //assign each task an id
         task.id = `task-${i}`;
@@ -163,7 +167,6 @@ export function findTask(id){
 
 export function deleteTask(index) {
     taskList.splice(index, 1);
-    showTasks();
 }
 
 export function getTask(index) {

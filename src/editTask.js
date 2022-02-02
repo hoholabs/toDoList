@@ -19,7 +19,7 @@ export function taskMenuBtn(taskId){
 
     //add menu buttons to the popup
 
-
+    //EDIT
     let taskEditBtn = document.createElement('button');
     taskEditBtn.addEventListener('click', () =>{editTask(taskId);});
     taskEditBtn.classList.add('task-menu-popup-btn');
@@ -29,9 +29,9 @@ export function taskMenuBtn(taskId){
     taskEditBtn.append(taskEditIcon);
     editTaskPopup.append(taskEditBtn)
 
-
+    //STEIKETHROUGH
     let taskCrossBtn = document.createElement('button');
-    taskCrossBtn.addEventListener('click', crossoutTask);
+    taskCrossBtn.addEventListener('click', () => {crossoutTask(taskId);});
     taskCrossBtn.classList.add('task-menu-popup-btn');
     let taskCrossIcon =  document.createElement('i');
     taskCrossIcon.className = 'material-icons';
@@ -39,7 +39,7 @@ export function taskMenuBtn(taskId){
     taskCrossBtn.append(taskCrossIcon);
     editTaskPopup.append(taskCrossBtn)
 
-
+    //REMOVE
     let taskRemoveBtn = document.createElement('button');
     taskRemoveBtn.addEventListener('click', () => {removeTask(taskId);});
     taskRemoveBtn.classList.add('task-menu-popup-btn');
@@ -84,6 +84,8 @@ function editTask(taskId){
     console.log(taskId);
     let thisTask = document.getElementById(taskId);
     // //function to reset page if user clicks outside of box
+    ////// interferes with label dropdown
+
     // document.addEventListener("click", function(event) {
     //     // If user clicks inside the element, do nothing
     //     if (event.target.closest(`#${taskId}`)) return
@@ -175,16 +177,32 @@ function editTask(taskId){
 }
 
 //function to strikeout a task
-function crossoutTask(){
+function crossoutTask(id){
+
+    let index = findTask(id);
+    let task = getTask(index);
+
+    changeTask(index,'strike',task.strike ? false : true);
+
     hidePopups();
-    this.parentNode.parentNode.parentNode.style.textDecoration= "line-through";
+    saveTaskList();
+    showTasks();
+
 }
 
 //function to remove a task
 function removeTask(id){
     hidePopups();
+    /// should turn all text red, 
+    //create a new red delete button where the desc dropdown is
+    //change the menu button to a cancel button
+    
+    //if you click on red delete;
     deleteTask(findTask(id));
     saveTaskList();
+    showTasks();
+    //if you click on cancel;
+    //        showTasks();
 
 }
 

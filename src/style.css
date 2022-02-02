@@ -103,6 +103,10 @@
   display: none;
 }
 
+.strike {
+  display: none;
+}
+
 .name {
   text-align: center;
 }
