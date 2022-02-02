@@ -85,7 +85,10 @@ taskList.forEach(element => {
 
         //adds strikethrough
         let strike = task.querySelector('.strike').textContent;
-        if (strike == "true") {task.style.textDecoration= "line-through"};
+        if (strike == "true") {
+            task.querySelector('.name').style.textDecoration= "line-through"
+            task.querySelector('.due').style.textDecoration= "line-through"
+        };
         
         //assign each task an id
         task.id = `task-${i}`;
