@@ -12,11 +12,10 @@ Storage.prototype.getObj = function(key) {
 }
 
 let taskList = [];
-//function to overwrite taskList
 
+//function to overwrite taskList
 export function setTaskList(newTaskList){
     taskList = newTaskList;
-    //sconsole.log(taskList);
     showTasks();
 }
 
@@ -167,4 +166,6 @@ export function deleteTask(index) {
     showTasks();
 }
 
-
+export function getTask(index) {
+    return taskList[index];
+}

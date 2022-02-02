@@ -1,5 +1,5 @@
 import threeDots from './noun-three-dot-4287657.svg';
-import { changeTask, findTask, deleteTask, saveTaskList, showTasks } from './tasks';
+import { changeTask, findTask, deleteTask, saveTaskList, showTasks, getTask } from './tasks';
 
 //create and return the edit task button
 
@@ -79,22 +79,46 @@ function hidePopups(){
 }
 
 //function to edit a task
-export function editTask(taskId){
-    hidePopups();
 
-    //let thisTask = this.parentNode.parentNode.parentNode;
+function editTask(taskId){
+    console.log(taskId);
     let thisTask = document.getElementById(taskId);
-    //console.log(thisTask);
+    // //function to reset page if user clicks outside of box
+    // document.addEventListener("click", function(event) {
+    //     // If user clicks inside the element, do nothing
+    //     if (event.target.closest(`#${taskId}`)) return
+    //     // If user clicks outside the element, hide it!
+    //     showTasks();
+    //   })
 
-    let textFields = thisTask.querySelectorAll('.name, .desc, .due')
+    let index = findTask(taskId)
 
-    //makes all textfields editable
-    textFields.forEach(element => {
-        element.contentEditable = "true";
-        element.classList.add('editing'); 
-    });
+    //get task data from tasklist
+    let task = getTask(index);
+    console.log(thisTask);
 
-    //shows description
+    //replace divs with input fields where appropriate
+
+    //name
+    let nameInput = document.createElement('input');
+    nameInput.value = task.name;
+    nameInput.placeholder = "Task";
+    nameInput.classList.add('task-item', 'name');
+    thisTask.querySelector('.name').replaceWith(nameInput);
+    //due
+    let dueInput = document.createElement('input');
+    dueInput.value = task.due;
+    dueInput.placeholder = "Due Date";
+    dueInput.classList.add('task-item', 'due');
+    thisTask.querySelector('.due').replaceWith(dueInput);
+    //description
+    let descInput = document.createElement('input');
+    descInput.value = task.desc;
+    descInput.placeholder = "Description";
+    descInput.classList.add('task-item','desc');
+    thisTask.querySelector('.desc').replaceWith(descInput);
+
+    //show description
     let thisDesc = thisTask.querySelector('.desc');
     thisDesc.classList.add('show-desc');
 
@@ -102,16 +126,17 @@ export function editTask(taskId){
     let menuBtn = thisTask.querySelector('.task-menu-button');
     let expBtn = thisTask.querySelector('.expand-button');
     menuBtn.style.display = "none";
-    expBtn.style.color = "var(--color3)";
+    //expBtn.style.color = "var(--color3)";
 
-    //make label interactive //////////////////////////////////////
+    //make label interactive
     let thisLabel = thisTask.querySelector('.label');
     let thisLabelDiv = thisTask.querySelector('.label-div');
-    console.log(thisLabel);
     thisLabel.addEventListener('click', function(event){
         event.preventDefault();
         thisLabelDiv.append(labelDropdown());
     })
+
+    //save changes button
 
     //add "OK" button
     let okBtn = document.createElement('i');
@@ -122,35 +147,26 @@ export function editTask(taskId){
 
     //add function to ok button to do stuff
     okBtn.addEventListener('click', function(){
-        //make taskfields content not editable
-        textFields.forEach(element => {
-            element.contentEditable = "false";
-            element.classList.remove('editing');    
-        });
+
         //save the edited data to the tasklist
 
-        //brute forced.. ugly.. fix later
+        changeTask(index,'name',nameInput.value);
+        changeTask(index,'desc',descInput.value);
+        changeTask(index,'due',dueInput.value);
+        changeTask(index,'priority',thisTask.querySelector('.priority').textContent);
 
-        let index = findTask(thisTask.id)
-        let name = thisTask.querySelectorAll('.task-item')[0].textContent
-        let desc = thisTask.querySelectorAll('.task-item')[1].textContent
-        let due = thisTask.querySelectorAll('.task-item')[2].textContent
-        let priority = thisTask.querySelectorAll('.task-item')[3].textContent
-
-        changeTask(index,'name',name);
-        changeTask(index,'desc',desc);
-        changeTask(index,'due',due);
-        changeTask(index,'priority',priority);
-
+        //remove show-desc class 
         thisDesc.classList.remove('show-desc');
 
         //remove the ok button
         document.getElementById('task-edit-ok-btn').remove();
         //show menu and expand button again
         menuBtn.style.display = "block";
-        expBtn.style.color = "var(--color2)";
+        //expBtn.style.color = "var(--color2)";
 
+        //save task list to local storage
         saveTaskList();
+        
         showTasks();
 
     });
