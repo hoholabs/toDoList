@@ -1,5 +1,6 @@
 import { getTab } from './nav.js';
 import { taskMenuBtn, expandBtn, editTask, colorPriority} from './editTask.js';
+import { createCalendar} from './calendar.js';
 
 let mainContainer = document.getElementById('main-container');
 
@@ -110,10 +111,6 @@ taskList.forEach(element => {
         //add menu button to task
         task.append(taskMenuBtn(`task-${i}`));
 
-        
-        //priority.style.color = color;
-        //priority.style.cssText = `background-color: ${color}; color: ${color}`
-
         //adds the task at the bottom of the main container
         mainContainer.append(task);
     }
@@ -122,13 +119,14 @@ taskList.forEach(element => {
 });
 
 createNewTaskBtn();
+mainContainer.append(createCalendar());
 };
 
 //function to add a new task 
 
 export function newTask(){
     //create blank task and then edit it
-    let newTask = createTask('','','','',getTab());
+    let newTask = createTask('','','','',getTab(),'false');
     addTask(newTask);
     showTasks();
     //find the newest, blank task

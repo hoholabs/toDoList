@@ -80,7 +80,7 @@ function hidePopups(){
 
 //function to edit a task
 
-function editTask(taskId){
+export function editTask(taskId){
     console.log(taskId);
     let thisTask = document.getElementById(taskId);
     // //function to reset page if user clicks outside of box
