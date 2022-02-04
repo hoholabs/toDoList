@@ -119,7 +119,7 @@ taskList.forEach(element => {
 });
 
 createNewTaskBtn();
-mainContainer.append(createCalendar());
+mainContainer.append(createCalendar(2022,1));
 };
 
 //function to add a new task 
