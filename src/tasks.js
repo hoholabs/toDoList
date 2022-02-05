@@ -95,8 +95,6 @@ taskList.forEach(element => {
         let dueDiv = document.createElement('div');
         dueDiv.classList.add('task-item','due');
         dueDiv.textContent = element.due;
-        //console.log(element);
-        //console.log(element.due);
         task.append(dueDiv);   
 
         //add description
@@ -114,11 +112,11 @@ taskList.forEach(element => {
         task.append(priorityDiv);   
 
         //adds strikethrough
-        // let strike = task.querySelector('.strike').textContent;
-        // if (strike == "true") {
-        //     task.querySelector('.name').style.textDecoration= "line-through"
-        //     task.querySelector('.due').style.textDecoration= "line-through"
-        // };
+        if (element.strike == true) {
+            task.querySelector('.name').style.textDecoration= "line-through"
+            task.querySelector('.due').style.textDecoration= "line-through"
+        };
+        
         
         //assign each task an id
         task.id = `task-${i}`;
@@ -148,7 +146,6 @@ taskList.forEach(element => {
 });
 
 createNewTaskBtn();
-//mainContainer.append(createCalendar(2022,1));
 };
 
 //function to add a new task 
@@ -158,23 +155,21 @@ export function newTask(){
     let newTask = createTask('','','','',getTab(),'false');
     addTask(newTask);
     showTasks();
-    //find the newest, blank task
-    //console.log(taskList.length-1);
     editTask(`task-${taskList.length-1}`);
 }
 
 //function to clear all tasks
 function clearTasks(){
-    //console.log("clear started");
+
     const array = document.querySelectorAll('.task');
     array.forEach(element => {        
         element.remove();
     });
+
     let newTaskBtn = document.getElementById("new-task-btn")
     if (newTaskBtn != null){
     newTaskBtn.remove();
     };
-    //console.log("clear finished");
 };
 
 //function to create add blank task button

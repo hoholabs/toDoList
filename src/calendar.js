@@ -73,11 +73,11 @@ export function createCalendar(year,month){
             day.textContent = days[index];
             day.classList.add('day');
 
-            // if(days[index] == getDay(today)){
-            //     day.style.color = "var(--color3)";
-            //     day.style.backgroundColor = "var(--color2)";
+            if(days[index] == getDay(today)){
+                day.style.color = "var(--color3)";
+                day.style.backgroundColor = "var(--color2)";
 
-            // };
+            };
             selectDay.append(day);
             
         }
@@ -104,19 +104,12 @@ export function createCalendar(year,month){
 
             day.classList.add('day');
             day.addEventListener('click',function(){
-                // console.log(selectYear.value);
-                // console.log(selectMonth.value);
-                // console.log(day.textContent);
                 let date = new Date;
                 date.setFullYear(selectYear.value,selectMonth.value,day.textContent);
-                //console.log(date);
-                //console.log(this.parentNode.parentNode.parentNode.parentNode.firstChild.textContent);
                 this.parentNode.parentNode.parentNode.parentNode.firstChild.textContent = formatDate(date);
             });
             //console.log(index);
             if(yy == getYear(today) && mm == getMonth(today) && index == getDay(today)){
-                //console.log(`mm = ${mm} and getMonth(today) = ${getMonth(today)}`);
-                //console.log(`yy = ${yy} and getYear(today) = ${getYear(today)}`);
                 day.style.color = "var(--color3)";
                 day.style.backgroundColor = "var(--color2)";
 
@@ -130,13 +123,11 @@ export function createCalendar(year,month){
 
     function clearDays(){
         document.getElementById("selectDay").remove();
-        //console.log("cleardays");
     }
     calendar.append(selectMonth);
     calendar.append(selectYear);
     showDays(year,month);
-    //console.log(calendar);
-    console.log("appendedcalendar");
+
     return calendar;
 }
 

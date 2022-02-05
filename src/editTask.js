@@ -32,14 +32,14 @@ export function taskMenuBtn(taskId){
     editTaskPopup.append(taskEditBtn)
 
     //STEIKETHROUGH
-    let taskCrossBtn = document.createElement('button');
-    taskCrossBtn.addEventListener('click', () => {crossoutTask(taskId);});
-    taskCrossBtn.classList.add('task-menu-popup-btn');
-    let taskCrossIcon =  document.createElement('i');
-    taskCrossIcon.className = 'material-icons';
-    taskCrossIcon.textContent = 'strikethrough_s';
-    taskCrossBtn.append(taskCrossIcon);
-    editTaskPopup.append(taskCrossBtn)
+    let taskStrikeBtn = document.createElement('button');
+    taskStrikeBtn.addEventListener('click', () => {strikeoutTask(taskId);});
+    taskStrikeBtn.classList.add('task-menu-popup-btn');
+    let taskStrikeIcon =  document.createElement('i');
+    taskStrikeIcon.className = 'material-icons';
+    taskStrikeIcon.textContent = 'strikethrough_s';
+    taskStrikeBtn.append(taskStrikeIcon);
+    editTaskPopup.append(taskStrikeBtn)
 
     //REMOVE
     let taskRemoveBtn = document.createElement('button');
@@ -194,7 +194,7 @@ export function editTask(taskId){
 }
 
 //function to strikeout a task
-function crossoutTask(id){
+function strikeoutTask(id){
 
     let index = findTask(id);
     let task = getTask(index);
