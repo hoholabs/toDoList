@@ -1,14 +1,17 @@
-import { getMonth, getYear, getDay, startOfMonth, getDaysInMonth, eachWeekendOfMonth, differenceInCalendarDays  } from 'date-fns';
+import { getMonth, getYear, getDay, startOfMonth, getDaysInMonth, format, eachWeekendOfMonth, differenceInCalendarDays  } from 'date-fns';
 
 export function createCalendar(year,month){
     const calendar = document.createElement('div');
     calendar.classList.add('calendar');
+    calendar.id = "calendar";
 
     const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
     const days =["S","M","T","W","T","F","S"]
 
     const selectYear = document.createElement('select');
+    selectYear.id = 'select-year'
     const selectMonth = document.createElement('select');
+    selectMonth.id = 'select-month'
 
     var today = new Date();
     var thisYear = getYear(today);
@@ -17,7 +20,7 @@ export function createCalendar(year,month){
     
     //YEAR
     
-    selectYear.id = 'selectYear'
+    
 
     for (let index = 0; index < 10; index++) {
         let option = document.createElement("option");
@@ -47,6 +50,7 @@ export function createCalendar(year,month){
     //DAY
     
     function showDays(yy,mm){
+        //console.log("showdays");
 
         if(document.getElementById('selectDay')){clearDays();}
         
@@ -63,15 +67,17 @@ export function createCalendar(year,month){
 
         //console.log(daysInLastMonth);
         
+        //create day headers
         for (let index = 0; index < days.length; index++) {
             let day = document.createElement('div');
             day.textContent = days[index];
             day.classList.add('day');
 
-            if(days[index] == getDay(today)){
-                day.style.color = "red";
+            // if(days[index] == getDay(today)){
+            //     day.style.color = "var(--color3)";
+            //     day.style.backgroundColor = "var(--color2)";
 
-            };
+            // };
             selectDay.append(day);
             
         }
@@ -79,6 +85,7 @@ export function createCalendar(year,month){
         for (let index = 0; index < 7*daysColumns; index++) {
             
             let day = document.createElement('div');
+            
             
             if((index-startDay+1)>daysInMonth){
                 day.textContent = index-startDay-daysInMonth+1;
@@ -96,12 +103,22 @@ export function createCalendar(year,month){
             }
 
             day.classList.add('day');
-
+            day.addEventListener('click',function(){
+                // console.log(selectYear.value);
+                // console.log(selectMonth.value);
+                // console.log(day.textContent);
+                let date = new Date;
+                date.setFullYear(selectYear.value,selectMonth.value,day.textContent);
+                //console.log(date);
+                //console.log(this.parentNode.parentNode.parentNode.parentNode.firstChild.textContent);
+                this.parentNode.parentNode.parentNode.parentNode.firstChild.textContent = formatDate(date);
+            });
             //console.log(index);
             if(yy == getYear(today) && mm == getMonth(today) && index == getDay(today)){
-                console.log(`mm = ${mm} and getMonth(today) = ${getMonth(today)}`);
-                console.log(`yy = ${yy} and getYear(today) = ${getYear(today)}`);
-                day.style.color = "red";
+                //console.log(`mm = ${mm} and getMonth(today) = ${getMonth(today)}`);
+                //console.log(`yy = ${yy} and getYear(today) = ${getYear(today)}`);
+                day.style.color = "var(--color3)";
+                day.style.backgroundColor = "var(--color2)";
 
             };
 
@@ -113,10 +130,18 @@ export function createCalendar(year,month){
 
     function clearDays(){
         document.getElementById("selectDay").remove();
+        //console.log("cleardays");
     }
     calendar.append(selectMonth);
     calendar.append(selectYear);
     showDays(year,month);
-
+    //console.log(calendar);
+    console.log("appendedcalendar");
     return calendar;
+}
+
+export function formatDate(date) {
+
+    return format(date,'d MMM yy');
+
 }

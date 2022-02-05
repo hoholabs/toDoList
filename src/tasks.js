@@ -1,6 +1,6 @@
 import { getTab } from './nav.js';
 import { taskMenuBtn, expandBtn, editTask, colorPriority} from './editTask.js';
-import { createCalendar} from './calendar.js';
+import { createCalendar, formatDate} from './calendar.js';
 
 let mainContainer = document.getElementById('main-container');
 
@@ -75,21 +75,50 @@ taskList.forEach(element => {
 
         //loops through each element in the object to create an input,
         // assign a classname, value, and append it to the task
-        for (const prop in element) {
-            if (Object.hasOwnProperty.call(element, prop)) {            
-                let div = document.createElement('div');
-                div.classList.add('task-item',prop);
-                div.textContent = element[prop];
-                task.append(div);              
-            }
-        }
+        // for (const prop in element) {
+        //     if (Object.hasOwnProperty.call(element, prop)) {            
+        //         let div = document.createElement('div');
+        //         div.classList.add('task-item',prop);
+        //         div.textContent = element[prop];
+        //         task.append(div);              
+        //     }
+        // }
+
+
+        // add name
+        let nameDiv = document.createElement('div');
+        nameDiv.classList.add('task-item','name');
+        nameDiv.textContent = element.name;
+        task.append(nameDiv);   
+        
+        //add due date
+        let dueDiv = document.createElement('div');
+        dueDiv.classList.add('task-item','due');
+        dueDiv.textContent = element.due;
+        //console.log(element);
+        //console.log(element.due);
+        task.append(dueDiv);   
+
+        //add description
+
+        let descDiv = document.createElement('div');
+        descDiv.classList.add('task-item','desc');
+        descDiv.textContent = element.desc;
+        task.append(descDiv);   
+
+        //add priority
+
+        let priorityDiv = document.createElement('div');
+        priorityDiv.classList.add('task-item','priority');
+        priorityDiv.textContent = element.priority;
+        task.append(priorityDiv);   
 
         //adds strikethrough
-        let strike = task.querySelector('.strike').textContent;
-        if (strike == "true") {
-            task.querySelector('.name').style.textDecoration= "line-through"
-            task.querySelector('.due').style.textDecoration= "line-through"
-        };
+        // let strike = task.querySelector('.strike').textContent;
+        // if (strike == "true") {
+        //     task.querySelector('.name').style.textDecoration= "line-through"
+        //     task.querySelector('.due').style.textDecoration= "line-through"
+        // };
         
         //assign each task an id
         task.id = `task-${i}`;
@@ -119,7 +148,7 @@ taskList.forEach(element => {
 });
 
 createNewTaskBtn();
-mainContainer.append(createCalendar(2022,1));
+//mainContainer.append(createCalendar(2022,1));
 };
 
 //function to add a new task 

@@ -1,5 +1,7 @@
 import threeDots from './noun-three-dot-4287657.svg';
 import { changeTask, findTask, deleteTask, saveTaskList, showTasks, getTask } from './tasks';
+import { getMonth, getYear, format } from 'date-fns';
+import { createCalendar, formatDate } from './calendar.js';
 
 //create and return the edit task button
 
@@ -81,7 +83,7 @@ function hidePopups(){
 //function to edit a task
 
 export function editTask(taskId){
-    console.log(taskId);
+    //console.log(taskId);
     let thisTask = document.getElementById(taskId);
     // //function to reset page if user clicks outside of box
     ////// interferes with label dropdown
@@ -97,7 +99,7 @@ export function editTask(taskId){
 
     //get task data from tasklist
     let task = getTask(index);
-    console.log(thisTask);
+    //console.log(thisTask);
 
     //replace divs with input fields where appropriate
 
@@ -107,12 +109,24 @@ export function editTask(taskId){
     nameInput.placeholder = "Task";
     nameInput.classList.add('task-item', 'name');
     thisTask.querySelector('.name').replaceWith(nameInput);
-    //due
+
+    //due ///////////////////////////////////////////
+
+
     let dueInput = document.createElement('input');
     dueInput.value = task.due;
-    dueInput.placeholder = "Due Date";
-    dueInput.classList.add('task-item', 'due');
-    thisTask.querySelector('.due').replaceWith(dueInput);
+    //dueInput.placeholder = "Due Date";
+    //dueInput.classList.add('task-item', 'due');
+    //thisTask.querySelector('.due').replaceWith(dueInput);
+
+    let thisDue = thisTask.querySelector('.due');
+    let thisDueCal = document.createElement('div');
+    thisDue.append(thisDueCal);
+    //console.log(thisTask.querySelector('.due'));
+    thisDue.addEventListener('click', () => {
+        thisDueCal.append(createCalendar(2022,1));
+    }, { once: true });
+
     //description
     let descInput = document.createElement('input');
     descInput.value = task.desc;
@@ -154,7 +168,7 @@ export function editTask(taskId){
 
         changeTask(index,'name',nameInput.value);
         changeTask(index,'desc',descInput.value);
-        changeTask(index,'due',dueInput.value);
+        changeTask(index,'due',thisDue.firstChild.textContent);
         changeTask(index,'priority',thisTask.querySelector('.priority').textContent);
 
         //remove show-desc class 
@@ -168,8 +182,11 @@ export function editTask(taskId){
 
         //save task list to local storage
         saveTaskList();
+        //console.log("tasklist saved");
         
         showTasks();
+        //console.log("showin");
+        //console.log(getTask(0));
 
     });
 
@@ -245,7 +262,7 @@ export function labelDropdown(){
             document.getElementById('label-dropdown').remove();
         })
 
-        console.log("appended");
+        //console.log("appended");
         dropDown.append(label);
     }
 
