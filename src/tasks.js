@@ -16,6 +16,7 @@ let taskList = [];
 
 //function to overwrite taskList
 export function setTaskList(newTaskList){
+    //console.log("setTask()");
     taskList = newTaskList;
     showTasks();
 }
@@ -56,7 +57,8 @@ export function saveTaskList(){
 //function to show tasklist in DOM
 
 export function showTasks(){
-clearTasks();
+    //console.log("showTasks()");
+    clearTasks();
 //i to track which index of taskList code is checking
 var i=0
 
@@ -73,43 +75,17 @@ taskList.forEach(element => {
         //append expand button
         task.append(expandBtn());
 
-        //loops through each element in the object to create an input,
-        // assign a classname, value, and append it to the task
-        // for (const prop in element) {
-        //     if (Object.hasOwnProperty.call(element, prop)) {            
-        //         let div = document.createElement('div');
-        //         div.classList.add('task-item',prop);
-        //         div.textContent = element[prop];
-        //         task.append(div);              
-        //     }
-        // }
+        //show displayed divs
+        let shownDivs = ['name','due','desc','priority'];
 
-
-        // add name
-        let nameDiv = document.createElement('div');
-        nameDiv.classList.add('task-item','name');
-        nameDiv.textContent = element.name;
-        task.append(nameDiv);   
-        
-        //add due date
-        let dueDiv = document.createElement('div');
-        dueDiv.classList.add('task-item','due');
-        dueDiv.textContent = element.due;
-        task.append(dueDiv);   
-
-        //add description
-
-        let descDiv = document.createElement('div');
-        descDiv.classList.add('task-item','desc');
-        descDiv.textContent = element.desc;
-        task.append(descDiv);   
-
-        //add priority
-
-        let priorityDiv = document.createElement('div');
-        priorityDiv.classList.add('task-item','priority');
-        priorityDiv.textContent = element.priority;
-        task.append(priorityDiv);   
+        for (let index = 0; index < shownDivs.length; index++) {
+            //const element = array[index];
+            let div = document.createElement('div');
+            div.classList.add('task-item',shownDivs[index]);
+            div.textContent = element[shownDivs[index]];
+            task.append(div);         
+            
+        }
 
         //adds strikethrough
         if (element.strike == true) {
@@ -152,6 +128,8 @@ createNewTaskBtn();
 
 export function newTask(){
     //create blank task and then edit it
+
+console.log("newTask()");
     let newTask = createTask('','','','',getTab(),'false');
     addTask(newTask);
     showTasks();
