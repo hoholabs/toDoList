@@ -3,14 +3,21 @@ import { createTask, showTasks } from './tasks';
 //Get main container from page
 let mainContainer = document.getElementById('main-container');
 
-// NAV BAR
+let tabList = [];
 
-//Create navigation bar
-let navBar = document.createElement("nav");
-navBar.id = "nav"
-navBar.style.display = "grid";
-navBar.textContent = "NAV BAR";
+export function setTabList(newTaskList){
+    tabList = newTabList;
+    showTasks();
+};
 
+export function createTab(name){
+
+};
+
+export function saveTabList(){
+    
+};
+    
 // TAB BAR
 
 //ceate tab bar
@@ -31,11 +38,11 @@ tabBar.id = "tab-bar";
     }
 
 addTab("main");
-addTab("second");
-addTab("third");
-navBar.append(tabBar);
+//addTab("second");
+//addTab("third");
+mainContainer.append(tabBar);
 
-//function to add tab to Navbar
+//function to add tab to tabBar
 
 function addTab(name){
     let newTab = document.createElement("div");
@@ -115,13 +122,14 @@ label.textContent = "label";
 label.classList.add('material-icons');
 titleBar.append(label);
 
-navBar.append(titleBar);
+mainContainer.append(titleBar);
 
 
 
 
 //Add Nav to top of page
-export function addNav(){
-    mainContainer.append(navBar);
+export function showTabs(){
+    mainContainer.append(tabBar);
+    mainContainer.append(titleBar);
 }
 

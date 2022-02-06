@@ -52,6 +52,8 @@
 
 #tab-bar{
   //border:solid orchid 2px;
+  border-bottom: 0;
+  width: 80vw;
   display:flex;
 }
 #new-tab-button{

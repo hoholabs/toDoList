@@ -1,4 +1,3 @@
-import threeDots from './noun-three-dot-4287657.svg';
 import { changeTask, findTask, deleteTask, saveTaskList, showTasks, getTask } from './tasks';
 import { getMonth, getYear, format } from 'date-fns';
 import { createCalendar, formatDate } from './calendar.js';
