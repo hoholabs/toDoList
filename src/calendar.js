@@ -19,9 +19,6 @@ export function createCalendar(year,month){
     var thisDay = getDay(today);
     
     //YEAR
-    
-    
-
     for (let index = 0; index < 10; index++) {
         let option = document.createElement("option");
         option.value = getYear(today)+index;
@@ -34,8 +31,7 @@ export function createCalendar(year,month){
         selectYear.add(option, null);
     }
 
-    //MONTH
-    
+    //MONTH    
     for (let index = 0; index < months.length; index++) {
         let option = document.createElement("option");
         option.value = index;
@@ -48,7 +44,6 @@ export function createCalendar(year,month){
     }
 
     //DAY
-    
     function showDays(yy,mm){
         //console.log("showdays");
 

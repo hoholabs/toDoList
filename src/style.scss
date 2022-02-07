@@ -48,6 +48,12 @@
   border-radius: 10px;
 }
 
+#title-bar-dropdown{
+  background-color: var(--color3);
+  position: absolute;
+  border: solid var(--color2) 2px;
+}
+
 // TABS
 
 #tab-bar{

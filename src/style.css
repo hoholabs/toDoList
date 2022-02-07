@@ -45,6 +45,12 @@
   border-radius: 10px;
 }
 
+#title-bar-dropdown {
+  background-color: var(--color3);
+  position: absolute;
+  border: solid var(--color2) 2px;
+}
+
 #tab-bar {
   border-bottom: 0;
   width: 80vw;

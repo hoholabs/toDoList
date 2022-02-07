@@ -15,9 +15,9 @@ Storage.prototype.getObj = function(key) {
 let taskList = [];
 
 //function to overwrite taskList
-export function setTaskList(newTaskList){
+export function getTaskList(newTaskList){
     taskList = newTaskList;
-    showTasks();
+    // showTasks();
 }
 
 //function to change task
@@ -164,4 +164,18 @@ export function deleteTask(index) {
 //function to return a task
 export function getTask(index) {
     return taskList[index];
+}
+
+export function deleteTasks(tab){
+
+    for (let index = taskList.length-1; index >= 0 ; index--) {
+        //console.log(index);
+        if (tab === taskList[index].inTab){
+            //console.log(index);
+            deleteTask(index);
+        }
+    //saveTaskList();
+    showTasks();
+        
+    }
 }
