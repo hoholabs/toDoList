@@ -12,7 +12,7 @@ Storage.prototype.getObj = function(key) {
 }
 
 let tabList = [];
-let currentTab = "";
+let currentTab = "main";
 let currentTabId = "";
 
 //factory function to create tabs
@@ -23,14 +23,21 @@ const tab = (name) => {
         deleteTasks(name);
         let tabIndex = id.slice(4);
         tabList.splice(tabIndex, 1);
+        saveTaskList();
+        saveTabList();
+        showTabs();
     }
-    const rename = () =>{
+    const rename = (id) =>{
         console.log("rename");
+        let tabIndex = id.slice(4);
+        let newName = prompt("New tab name:");
+        tabList[tabIndex].name = newName
+        name = newName;
+        saveTabList();
+        showTabs();
     }
     return {name, getName, remove, rename}
 }
-
-
 
 export function getTabList(tabArray){
     console.log("getTabList");
@@ -43,8 +50,6 @@ export function getTabList(tabArray){
     });
     showTabs();
 };
-
-
 
 //add tab to the tabList
 export function addTab(tab){
@@ -71,7 +76,7 @@ export function showTabs(){
          tabBar.append(showTab);
 
     });
-    
+
     tabSelect("tab-0")
 }
 
@@ -81,12 +86,10 @@ export function saveTabList(){
 
     let tabArray = [];
     tabList.forEach(element => {
-        //console.log(element.name)
         tabArray.push(element.name)
     });
 
     localStorage.setObj('tabList', tabArray);
-    //console.log(localStorage.getObj('tabList'));
 
 };
 
@@ -94,6 +97,7 @@ export function clearTabs(){
     const array = document.querySelectorAll('.tab');
     array.forEach(element => {        
         element.remove();
+        console.log("tabremoved");
     });
 }
 
@@ -213,26 +217,35 @@ function titleDropdown(){
     let dropdown = document.createElement('div')
     dropdown.id = "title-bar-dropdown";
 
+    // REMOVE 
     let removeBtn = document.createElement('i')
     removeBtn.classList.add('material-icons');
     removeBtn.textContent = 'delete';
 
     //add click event to the remove button
     removeBtn.addEventListener('click', function(){
-
          let tabIndex = currentTabId.slice(4);
          tabList[tabIndex].remove(currentTabId);
-
         // //remove the dropdown
          document.getElementById('title-bar-dropdown').remove();
-
-        saveTaskList();
-        saveTabList();
-
-        showTabs();
     })
 
+    //EDIT
+    let editBtn = document.createElement('i')
+    editBtn.classList.add('material-icons');
+    editBtn.textContent = 'edit';
+
+    //add click event to the edit button
+    editBtn.addEventListener('click', function(){
+         let tabIndex = currentTabId.slice(4);
+         tabList[tabIndex].rename(currentTabId);
+        // //remove the dropdown
+         document.getElementById('title-bar-dropdown').remove();
+    })
+
+
     dropdown.append(removeBtn);
+    dropdown.append(editBtn);
 
     return dropdown;
     

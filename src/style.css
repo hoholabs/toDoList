@@ -46,9 +46,21 @@
 }
 
 #title-bar-dropdown {
-  background-color: var(--color3);
-  position: absolute;
   border: solid var(--color2) 2px;
+  border-radius: 10px;
+  background-color: var(--color3);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: absolute;
+}
+
+#title-bar-dropdown i {
+  padding: 5px;
 }
 
 #tab-bar {

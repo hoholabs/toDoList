@@ -49,9 +49,15 @@
 }
 
 #title-bar-dropdown{
+  border:solid var(--color2) 2px;
+  border-radius: 10px;
   background-color: var(--color3);
-  position: absolute;
-  border: solid var(--color2) 2px;
+  display: flex;
+  flex-direction: column;
+  position:absolute;
+    i{
+      padding: 5px;
+    }
 }
 
 // TABS
@@ -194,11 +200,9 @@
   border:solid var(--color2) 2px;
   border-radius: 10px;
   background-color: var(--color3);
-  //width:100px;
-  //height:100px;
-  //right: 50px;
   position:absolute;
   display:none;
+  
 }
 
 .task-menu-popup-btn{
