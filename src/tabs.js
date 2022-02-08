@@ -1,4 +1,4 @@
-import { createTask, showTasks, deleteTasks, saveTaskList } from './tasks';
+import { createTask, showTasks, deleteTasks, saveTaskList, editTasks } from './tasks';
 
 //Get main container from page
 let mainContainer = document.getElementById('main-container');
@@ -19,32 +19,31 @@ let currentTabId = "";
 const tab = (name) => {
     const getName = () => name;
     const remove = (id) => {
-        console.log("remove tab")
         deleteTasks(name);
         let tabIndex = id.slice(4);
         tabList.splice(tabIndex, 1);
         saveTaskList();
         saveTabList();
         showTabs();
+        return
     }
     const rename = (id) =>{
-        console.log("rename");
         let tabIndex = id.slice(4);
         let newName = prompt("New tab name:");
         tabList[tabIndex].name = newName
         name = newName;
         saveTabList();
         showTabs();
+        tabSelect(id);
+        return newName;
     }
     return {name, getName, remove, rename}
 }
 
 export function getTabList(tabArray){
-    console.log("getTabList");
 
     //Create a new tab for each tab name from tabArray
     tabArray.forEach(element => {
-        //console.log(element);
         let thisTab = tab(element);
         addTab(thisTab);
     });
@@ -53,7 +52,6 @@ export function getTabList(tabArray){
 
 //add tab to the tabList
 export function addTab(tab){
-    console.log("addTab");
     tabList.push(tab);
     saveTabList();
 }
@@ -61,11 +59,8 @@ export function addTab(tab){
 export function showTabs(){
     clearTabs();
 
-    console.log("showTabs");
     let i = 0;
     tabList.forEach(element => {
-        //console.log(element.getName());
-        // console.log(element.getName());
          let showTab = document.createElement("div");
          showTab.id = `tab-${i}`;
          i++
@@ -78,11 +73,10 @@ export function showTabs(){
     });
 
     tabSelect("tab-0")
+    
 }
 
 export function saveTabList(){
-    console.log("saveTabList");
-    //console.log(tabList);
 
     let tabArray = [];
     tabList.forEach(element => {
@@ -97,7 +91,6 @@ export function clearTabs(){
     const array = document.querySelectorAll('.tab');
     array.forEach(element => {        
         element.remove();
-        console.log("tabremoved");
     });
 }
 
@@ -117,7 +110,6 @@ tabBar.append(newTabBtn);
 newTabBtn.addEventListener('click',()=> {newTab("")});
 
 export function newTab(name){
-    console.log("new tab");
     if (name) {
         addTab(tab(name));
     } else {
@@ -213,7 +205,6 @@ titleBar.append(label);
 mainContainer.append(titleBar);
 
 function titleDropdown(){
-    console.log("dropdown");
     let dropdown = document.createElement('div')
     dropdown.id = "title-bar-dropdown";
 
@@ -237,8 +228,13 @@ function titleDropdown(){
 
     //add click event to the edit button
     editBtn.addEventListener('click', function(){
-         let tabIndex = currentTabId.slice(4);
-         tabList[tabIndex].rename(currentTabId);
+        
+        //change all tabs intab to new name
+        let oldName = currentTab
+        let tabIndex = currentTabId.slice(4);
+        let newName = tabList[tabIndex].rename(currentTabId);
+        editTasks("inTab", oldName, newName);
+
         // //remove the dropdown
          document.getElementById('title-bar-dropdown').remove();
     })

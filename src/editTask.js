@@ -238,7 +238,6 @@ export function colorPriority(num){
 
 export function labelDropdown(){
     
-
     let dropDown = document.createElement('div')
     dropDown.id = "label-dropdown";
 

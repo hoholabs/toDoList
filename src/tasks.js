@@ -148,34 +148,51 @@ export function createNewTaskBtn(){
     newTaskBtn.id = "new-task-btn";
     newTaskBtn.addEventListener('click',newTask); 
     mainContainer.append(newTaskBtn);
-}
+};
 
 //function to find a task by its id
 export function findTask(id){
     let index = id.slice(5);
     return index
-}
+};
 
 //function to remove a task
 export function deleteTask(index) {
     taskList.splice(index, 1);
-}
+};
 
 //function to return a task
 export function getTask(index) {
     return taskList[index];
-}
+};
 
 export function deleteTasks(tab){
 
     for (let index = taskList.length-1; index >= 0 ; index--) {
-        //console.log(index);
         if (tab === taskList[index].inTab){
-            //console.log(index);
             deleteTask(index);
         }
-    //saveTaskList();
     showTasks();
         
     }
-}
+};
+
+export function editTasks(prop, value, newValue, index){
+
+    if(index){
+        //in case I want to only target one index.. can write later
+
+        return
+    }
+    //if no index, changes all instances of value to newValue
+    for (let i = taskList.length-1; i >= 0 ; i--) {
+        if (taskList[i][prop] === value) {
+         console.log(taskList[i][prop])   
+         taskList[i][prop] = newValue;
+        }
+        
+    };
+    saveTaskList();
+    showTasks();
+
+};
