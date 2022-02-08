@@ -113,12 +113,11 @@ export function newTab(name){
     if (name) {
         addTab(tab(name));
     } else {
-        
-        let newTab = tab("noname");
-        addTab(newTab);
+        let newTab = prompt("New tab name:");
+        addTab(tab(newTab));
     };
     
-    //saveTabList();
+    saveTabList();
     showTabs();
 }
 
@@ -228,7 +227,7 @@ function titleDropdown(){
 
     //add click event to the edit button
     editBtn.addEventListener('click', function(){
-        
+
         //change all tabs intab to new name
         let oldName = currentTab
         let tabIndex = currentTabId.slice(4);
