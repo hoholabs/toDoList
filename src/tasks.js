@@ -35,7 +35,7 @@ export function changeTask(index, prop, value) {
 
 //function to create and return a task
 
-export function createTask(name, desc, due, priority, inTab, strike) {
+export function createTask(name, desc, due, priority, inTab, strike, taskId) {
     //pre-firebase style code below
     return {
         name: name,
@@ -43,7 +43,8 @@ export function createTask(name, desc, due, priority, inTab, strike) {
         due: due,
         priority: priority,
         inTab: inTab,
-        strike: strike
+        strike: strike,
+        taskId: new Date().getTime().toString()
     };
 }
 
@@ -57,17 +58,12 @@ export function addTask(task) {
 export function saveTaskList() {
     localStorage.setObj('taskList', taskList);
     taskList.forEach((task) => {
-        if (task.name) {
-            storeTask(task);
-        } else {
-            task.name = new Date().getTime().toString();
-            storeTask(task);
-        }
+        storeTask(task);
     });
 }
 async function storeTask(task) {
     console.log(task.name);
-    await setDoc(doc(db, 'tasks', task.name), {
+    await setDoc(doc(db, 'tasks', task.taskId), {
         task
     });
 }

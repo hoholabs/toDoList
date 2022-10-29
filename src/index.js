@@ -72,7 +72,7 @@ export const db = getFirestore(app);
 
 //function to read local storage
 
-// localStorage.clear();
+localStorage.clear();
 //create new tab popup
 if (!localStorage.getItem('tabList')) {
     console.log('local tabList is empty');
