@@ -56,11 +56,19 @@ export function addTask(task) {
 //function to write tasklist to local storage
 export function saveTaskList() {
     localStorage.setObj('taskList', taskList);
-    storeTasks();
+    taskList.forEach((task) => {
+        if (task.name) {
+            storeTask(task);
+        } else {
+            task.name = new Date().getTime().toString();
+            storeTask(task);
+        }
+    });
 }
-async function storeTasks() {
-    await setDoc(doc(db, 'tasks', 'tasks'), {
-        taskList
+async function storeTask(task) {
+    console.log(task.name);
+    await setDoc(doc(db, 'tasks', task.name), {
+        task
     });
 }
 
