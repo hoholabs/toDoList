@@ -198,11 +198,8 @@ export function editTask(taskId) {
 
         //save task list to local storage
         saveTaskList();
-        //console.log("tasklist saved");
 
         showTasks();
-        //console.log("showin");
-        //console.log(getTask(0));
     });
 }
 
@@ -291,4 +288,10 @@ export function expandBtn() {
             : (this.textContent = 'expand_more');
     });
     return expandButton;
+}
+
+async function storeTask(task) {
+    await setDoc(doc(db, 'tasks', task.name), {
+        task
+    });
 }

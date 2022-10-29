@@ -1,10 +1,4 @@
-import {
-    createTask,
-    showTasks,
-    deleteTasks,
-    saveTaskList,
-    editTasks
-} from './tasks';
+import { showTasks, deleteTasks, saveTaskList, editTasks } from './tasks';
 
 //Get main container from page
 let mainContainer = document.getElementById('main-container');
@@ -151,7 +145,14 @@ export function getTab() {
 //create title bar
 let titleBar = document.createElement('div');
 titleBar.id = 'title-bar';
-let titles = createTask('Task', 'Description', 'Due date', 'Priority', 'none');
+let titles = {
+    name: 'Task',
+    desc: 'Description',
+    due: 'Due Date',
+    priority: 'Priority',
+    inTab: 'none',
+    strike: false
+};
 delete titles.desc;
 
 //title bar tab menu button

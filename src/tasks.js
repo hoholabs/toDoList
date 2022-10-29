@@ -1,5 +1,6 @@
 import { getTab } from './tabs.js';
 import { taskMenuBtn, expandBtn, editTask, colorPriority } from './editTask.js';
+import { db } from './index.js';
 import {
     getFirestore,
     collection,
@@ -35,15 +36,7 @@ export function changeTask(index, prop, value) {
 //function to create and return a task
 
 export function createTask(name, desc, due, priority, inTab, strike) {
-    // await setDoc(doc(db, 'tasks', name), {
-    //     name: name,
-    //     desc: desc,
-    //     due: due,
-    //     priority: priority,
-    //     inTab: inTab,
-    //     strike: strike
-    // });
-
+    //pre-firebase style code below
     return {
         name: name,
         desc: desc,
@@ -63,6 +56,12 @@ export function addTask(task) {
 //function to write tasklist to local storage
 export function saveTaskList() {
     localStorage.setObj('taskList', taskList);
+    storeTasks();
+}
+async function storeTasks() {
+    await setDoc(doc(db, 'tasks', 'tasks'), {
+        taskList
+    });
 }
 
 //function to show tasklist in DOM
@@ -141,7 +140,7 @@ export function newTask() {
 }
 
 //function to clear all tasks
-function clearTasks() {
+export function clearTasks() {
     const array = document.querySelectorAll('.task');
     array.forEach((element) => {
         element.remove();
