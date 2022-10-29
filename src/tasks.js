@@ -1,5 +1,12 @@
 import { getTab } from './tabs.js';
 import { taskMenuBtn, expandBtn, editTask, colorPriority } from './editTask.js';
+import {
+    getFirestore,
+    collection,
+    doc,
+    addDoc,
+    setDoc
+} from 'firebase/firestore';
 //import { createCalendar, formatDate} from './calendar.js';
 
 let mainContainer = document.getElementById('main-container');
@@ -26,7 +33,17 @@ export function changeTask(index, prop, value) {
 }
 
 //function to create and return a task
+
 export function createTask(name, desc, due, priority, inTab, strike) {
+    // await setDoc(doc(db, 'tasks', name), {
+    //     name: name,
+    //     desc: desc,
+    //     due: due,
+    //     priority: priority,
+    //     inTab: inTab,
+    //     strike: strike
+    // });
+
     return {
         name: name,
         desc: desc,

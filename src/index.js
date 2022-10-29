@@ -7,7 +7,13 @@ import { getTaskList, createTask, newTask, addTask, showTasks } from './tasks';
 // Import the functions you need from the SDKs you need
 
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import {
+    getFirestore,
+    collection,
+    doc,
+    addDoc,
+    setDoc
+} from 'firebase/firestore';
 
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -29,8 +35,44 @@ const app = initializeApp(firebaseConfig);
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
 
+// function sendTask(value) {
+//     console.log(value);
+// }
+
+// let mainContainer = document.getElementById('main-container');
+// let testbox = document.createElement('div');
+// testbox.id = 'testbox';
+// let testinput = document.createElement('input');
+// testinput.id = 'testinput';
+// let testbutton = document.createElement('button');
+// testbutton.addEventListener('click', () => {
+//     sendTask(testinput.value);
+// });
+// testbutton.id = 'testbutton';
+
+// testbox.append(testinput);
+// testbox.append(testbutton);
+// mainContainer.append(testbox);
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+//load tasks from database
+
+//this works, sets a task
+// await setDoc(doc(db, 'tasks', 'task1'), {
+//     name: 'name',
+//     desc: 'desc',
+//     due: 'due',
+//     priority: 'priority',
+//     inTab: 'inTab',
+//     strike: 'strike'
+// });
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 //function to read local storage
 
+// localStorage.clear();
 //create new tab popup
 if (!localStorage.getItem('tabList')) {
     console.log('local tabList is empty');
@@ -45,14 +87,13 @@ if (!localStorage.getItem('tabList')) {
 //set tasks empty array if empty
 if (!localStorage.getItem('taskList')) {
     console.log('local taskList is empty');
-    //newTask();
+    // newTask();
     //set stored tasklist otherwise
 } else {
     getTaskList(localStorage.getObj('taskList'));
     //console.log(localStorage.getObj('taskList'));
 }
 
-//showTabsOld();
 showTasks();
 showTabs();
 
