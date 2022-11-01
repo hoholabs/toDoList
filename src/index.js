@@ -10,7 +10,7 @@ import { initializeApp } from 'firebase/app';
 import {
     getFirestore,
     collection,
-    doc,
+    getDocs,
     addDoc,
     setDoc
 } from 'firebase/firestore';
@@ -35,6 +35,15 @@ const app = initializeApp(firebaseConfig);
 // Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(app);
 
+// ~~~~~~~~~~~~~~~~~
+
+const cloudTasks = await getDocs(collection(db, 'tasks'));
+cloudTasks.forEach((task) => {
+    // console.log(task.data());
+});
+
+// ~~~~~~~~~~~~~~~~~
+
 //function to read local storage
 
 // localStorage.clear();
@@ -48,14 +57,18 @@ if (!localStorage.getItem('tabList')) {
     console.log('local tabList loaded');
 }
 
-//set tasks empty array if empty
-if (!localStorage.getItem('taskList')) {
-    console.log('local taskList is empty');
-    // newTask();
-    //set stored tasklist otherwise
-} else {
-    getTaskList(localStorage.getObj('taskList'));
-}
+// getTaskList(localStorage.getObj('taskList'));
+// old, local storage^
+
+let cloudTasksQuery = await getDocs(collection(db, 'tasks'));
+let cloudTasksArray = [];
+cloudTasksQuery.forEach((task) => {
+    let taskData = task.data();
+    // console.log(taskData.task);
+    cloudTasksArray.push(taskData.task);
+});
+console.log(cloudTasksArray);
+getTaskList(cloudTasksArray);
 
 showTasks();
 showTabs();

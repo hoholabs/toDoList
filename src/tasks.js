@@ -5,7 +5,7 @@ import {
     getFirestore,
     collection,
     doc,
-    addDoc,
+    getDocs,
     setDoc
 } from 'firebase/firestore';
 //import { createCalendar, formatDate} from './calendar.js';
@@ -24,8 +24,21 @@ let taskList = [];
 
 //function to overwrite taskList
 export function getTaskList(newTaskList) {
+    console.log(newTaskList);
+    grabTaskList();
     taskList = newTaskList;
     // showTasks();
+}
+
+async function grabTaskList() {
+    let cloudTasksQuery = await getDocs(collection(db, 'tasks'));
+    let cloudTasksArray = [];
+    cloudTasksQuery.forEach((task) => {
+        let taskData = task.data();
+        // console.log(taskData.task);
+        cloudTasksArray.push(taskData.task);
+    });
+    console.log(cloudTasksArray);
 }
 
 //function to change task
@@ -62,7 +75,7 @@ export function saveTaskList() {
     });
 }
 async function storeTask(task) {
-    console.log(task.name);
+    // console.log(task.name);
     await setDoc(doc(db, 'tasks', task.taskId), {
         task
     });
