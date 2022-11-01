@@ -1,4 +1,12 @@
 import { showTasks, deleteTasks, saveTaskList, editTasks } from './tasks';
+import { db } from './index.js';
+import {
+    getFirestore,
+    collection,
+    doc,
+    addDoc,
+    setDoc
+} from 'firebase/firestore';
 
 //Get main container from page
 let mainContainer = document.getElementById('main-container');
@@ -29,6 +37,7 @@ const tab = (name) => {
     };
     const rename = (id) => {
         let tabIndex = id.slice(4);
+        console.log(tabIndex);
         let newName = prompt('New tab name:');
         tabList[tabIndex].name = newName;
         name = newName;
@@ -37,7 +46,8 @@ const tab = (name) => {
         tabSelect(id);
         return newName;
     };
-    return { name, getName, remove, rename };
+    const tabId = new Date().getTime().toString();
+    return { tabId, name, getName, remove, rename };
 };
 
 export function getTabList(tabArray) {
@@ -77,11 +87,18 @@ export function showTabs() {
 
 export function saveTabList() {
     let tabArray = [];
-    tabList.forEach((element) => {
-        tabArray.push(element.name);
+    tabList.forEach((tab) => {
+        tabArray.push(tab.name);
+        storeTab(tab);
     });
 
     localStorage.setObj('tabList', tabArray);
+}
+
+async function storeTab(tab) {
+    await setDoc(doc(db, 'tabs', tab.tabId), {
+        name: tab.name
+    });
 }
 
 export function clearTabs() {
