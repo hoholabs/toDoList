@@ -2,7 +2,7 @@ import { getTab } from './tabs.js';
 import { taskMenuBtn, expandBtn, editTask, colorPriority } from './editTask.js';
 import { db } from './index.js';
 import {
-    getFirestore,
+    deleteDoc,
     collection,
     doc,
     getDocs,
@@ -13,12 +13,12 @@ import {
 let mainContainer = document.getElementById('main-container');
 
 //extend functionality of local storage to allow for arrays and objects
-Storage.prototype.setObj = function (key, obj) {
-    return this.setItem(key, JSON.stringify(obj));
-};
-Storage.prototype.getObj = function (key) {
-    return JSON.parse(this.getItem(key));
-};
+// Storage.prototype.setObj = function (key, obj) {
+//     return this.setItem(key, JSON.stringify(obj));
+// };
+// Storage.prototype.getObj = function (key) {
+//     return JSON.parse(this.getItem(key));
+// };
 
 let taskList = [];
 
@@ -34,10 +34,8 @@ async function grabTaskList() {
     let cloudTasksArray = [];
     cloudTasksQuery.forEach((task) => {
         let taskData = task.data();
-        // console.log(taskData.task);
         cloudTasksArray.push(taskData.task);
     });
-    // console.log(cloudTasksArray);
 }
 
 //function to change task
@@ -66,7 +64,7 @@ export function addTask(task) {
     saveTaskList();
 }
 
-//function to write tasklist to local storage
+//function to write tasklist to cloud storage on firebase
 export function saveTaskList() {
     // localStorage.setObj('taskList', taskList);
     taskList.forEach((task) => {
@@ -74,7 +72,6 @@ export function saveTaskList() {
     });
 }
 async function storeTask(task) {
-    // console.log(task.name);
     await setDoc(doc(db, 'tasks', task.taskId), {
         task
     });
@@ -185,7 +182,12 @@ export function findTask(id) {
 
 //function to remove a task
 export function deleteTask(index) {
+    deleteCloudTask(taskList[index].taskId);
     taskList.splice(index, 1);
+    saveTaskList();
+}
+async function deleteCloudTask(taskId) {
+    await deleteDoc(doc(db, 'tasks', taskId));
 }
 
 //function to return a task
@@ -211,7 +213,6 @@ export function editTasks(prop, value, newValue, index) {
     //if no index, changes all instances of value to newValue
     for (let i = taskList.length - 1; i >= 0; i--) {
         if (taskList[i][prop] === value) {
-            console.log(taskList[i][prop]);
             taskList[i][prop] = newValue;
         }
     }

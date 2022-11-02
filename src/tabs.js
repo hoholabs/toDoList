@@ -57,7 +57,6 @@ const tab = (name, tabId) => {
 export function getTabList(tabArray) {
     //Create a new tab for each tab name from tabArray
     tabArray.forEach((object) => {
-        console.log(object);
         let thisTab = tab(object.name, object.tabId);
         addTab(thisTab);
     });
