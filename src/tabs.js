@@ -23,6 +23,7 @@ const tab = (name, tabId) => {
     const remove = (id) => {
         deleteTasks(name);
         let tabIndex = id.slice(4);
+        deleteTab(tabList[tabIndex]);
         tabList.splice(tabIndex, 1);
         saveTaskList();
         saveTabList();
@@ -243,7 +244,6 @@ function titleDropdown() {
     //add click event to the remove button
     removeBtn.addEventListener('click', function () {
         let tabIndex = currentTabId.slice(4);
-        deleteTab(tabList[tabIndex]);
         tabList[tabIndex].remove(currentTabId);
 
         // //remove the dropdown
