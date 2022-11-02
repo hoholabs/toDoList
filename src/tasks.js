@@ -24,7 +24,6 @@ let taskList = [];
 
 //function to overwrite taskList
 export function getTaskList(newTaskList) {
-    console.log(newTaskList);
     grabTaskList();
     taskList = newTaskList;
     // showTasks();
@@ -38,7 +37,7 @@ async function grabTaskList() {
         // console.log(taskData.task);
         cloudTasksArray.push(taskData.task);
     });
-    console.log(cloudTasksArray);
+    // console.log(cloudTasksArray);
 }
 
 //function to change task
@@ -69,7 +68,7 @@ export function addTask(task) {
 
 //function to write tasklist to local storage
 export function saveTaskList() {
-    localStorage.setObj('taskList', taskList);
+    // localStorage.setObj('taskList', taskList);
     taskList.forEach((task) => {
         storeTask(task);
     });

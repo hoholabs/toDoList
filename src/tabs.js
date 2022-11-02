@@ -24,7 +24,7 @@ let currentTab = 'main';
 let currentTabId = '';
 
 //factory function to create tabs
-const tab = (name) => {
+const tab = (name, tabId) => {
     const getName = () => name;
     const remove = (id) => {
         deleteTasks(name);
@@ -37,23 +37,28 @@ const tab = (name) => {
     };
     const rename = (id) => {
         let tabIndex = id.slice(4);
-        console.log(tabIndex);
+
         let newName = prompt('New tab name:');
         tabList[tabIndex].name = newName;
         name = newName;
+
         saveTabList();
         showTabs();
         tabSelect(id);
         return newName;
     };
-    const tabId = new Date().getTime().toString();
+    if (tabId.length === 0) {
+        const tabId = new Date().getTime().toString();
+    }
+
     return { tabId, name, getName, remove, rename };
 };
 
 export function getTabList(tabArray) {
     //Create a new tab for each tab name from tabArray
-    tabArray.forEach((element) => {
-        let thisTab = tab(element);
+    tabArray.forEach((object) => {
+        console.log(object);
+        let thisTab = tab(object.name, object.tabId);
         addTab(thisTab);
     });
     showTabs();
@@ -87,17 +92,22 @@ export function showTabs() {
 
 export function saveTabList() {
     let tabArray = [];
+
     tabList.forEach((tab) => {
+        let tabObj = {};
+        tabObj.name = tab.name;
+        tabObj.tabId = tab.tabId;
         tabArray.push(tab.name);
-        storeTab(tab);
+
+        storeTab(tabObj);
     });
 
-    localStorage.setObj('tabList', tabArray);
+    // localStorage.setObj('tabList', tabArray);
 }
 
 async function storeTab(tab) {
     await setDoc(doc(db, 'tabs', tab.tabId), {
-        name: tab.name
+        tab
     });
 }
 

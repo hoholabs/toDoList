@@ -35,39 +35,29 @@ const app = initializeApp(firebaseConfig);
 // Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(app);
 
-// ~~~~~~~~~~~~~~~~~
-
-const cloudTasks = await getDocs(collection(db, 'tasks'));
-cloudTasks.forEach((task) => {
-    // console.log(task.data());
+//get tabs from firebase
+let cloudTabsQuery = await getDocs(collection(db, 'tabs'));
+let cloudTabsArray = [];
+cloudTabsQuery.forEach((tab) => {
+    let tabData = tab.data();
+    let tabObj = {};
+    tabObj.name = tabData.tab.name;
+    tabObj.tabId = tabData.tab.tabId;
+    cloudTabsArray.push(tabObj);
 });
-
-// ~~~~~~~~~~~~~~~~~
-
-//function to read local storage
-
-// localStorage.clear();
-//create new tab popup
-if (!localStorage.getItem('tabList')) {
-    console.log('local tabList is empty');
+if (cloudTabsArray.length === 0) {
+    //if no tabs, create a 'main' tab
     newTab('main');
-    //something else here later
-} else {
-    getTabList(localStorage.getObj('tabList'));
-    console.log('local tabList loaded');
 }
+getTabList(cloudTabsArray);
 
-// getTaskList(localStorage.getObj('taskList'));
-// old, local storage^
-
+//get tasks from firebase
 let cloudTasksQuery = await getDocs(collection(db, 'tasks'));
 let cloudTasksArray = [];
 cloudTasksQuery.forEach((task) => {
     let taskData = task.data();
-    // console.log(taskData.task);
     cloudTasksArray.push(taskData.task);
 });
-console.log(cloudTasksArray);
 getTaskList(cloudTasksArray);
 
 showTasks();
