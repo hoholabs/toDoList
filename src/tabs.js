@@ -1,23 +1,17 @@
 import { showTasks, deleteTasks, saveTaskList, editTasks } from './tasks';
 import { db } from './index.js';
-import {
-    getFirestore,
-    collection,
-    doc,
-    addDoc,
-    setDoc
-} from 'firebase/firestore';
+import { doc, setDoc, deleteDoc } from 'firebase/firestore';
 
 //Get main container from page
 let mainContainer = document.getElementById('main-container');
 
 //extend functionality of local storage to allow for arrays and objects
-Storage.prototype.setObj = function (key, obj) {
-    return this.setItem(key, JSON.stringify(obj));
-};
-Storage.prototype.getObj = function (key) {
-    return JSON.parse(this.getItem(key));
-};
+// Storage.prototype.setObj = function (key, obj) {
+//     return this.setItem(key, JSON.stringify(obj));
+// };
+// Storage.prototype.getObj = function (key) {
+//     return JSON.parse(this.getItem(key));
+// };
 
 let tabList = [];
 let currentTab = 'main';
@@ -47,8 +41,9 @@ const tab = (name, tabId) => {
         tabSelect(id);
         return newName;
     };
-    if (tabId.length === 0) {
-        const tabId = new Date().getTime().toString();
+
+    if (typeof tabId === 'undefined') {
+        tabId = new Date().getTime().toString();
     }
 
     return { tabId, name, getName, remove, rename };
@@ -115,6 +110,11 @@ export function clearTabs() {
     array.forEach((element) => {
         element.remove();
     });
+}
+
+async function deleteTab(tab) {
+    console.log(tab);
+    await deleteDoc(doc(db, 'tabs', tab.tabId));
 }
 
 // TAB BAR
@@ -243,7 +243,9 @@ function titleDropdown() {
     //add click event to the remove button
     removeBtn.addEventListener('click', function () {
         let tabIndex = currentTabId.slice(4);
+        deleteTab(tabList[tabIndex]);
         tabList[tabIndex].remove(currentTabId);
+
         // //remove the dropdown
         document.getElementById('title-bar-dropdown').remove();
     });
